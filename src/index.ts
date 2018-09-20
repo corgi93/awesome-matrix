@@ -1,22 +1,24 @@
 /*
  * lesson2
  */
-var readline = require('readline-sync');
-
-var inputRows: number = readline.question('Enter Rows: ');
-var inputCols: number = readline.question('Enter Cols: ');
+import readline from "readline-sync";
 
 
-function printStarArray(rows: number, cols: number): void {
-    const twoDimentionArray: Array<Array<string>> = [];
+
+const inputRows: any = readline.question("Enter Rows: ");
+const inputCols: any = readline.question("Enter Cols: ");
+
+
+function printStarArray(rows: number, cols: number): Array<Array<string>> {
+    const twoDimensionArray: Array<Array<string>> = [];
     for (let r = 0; r < rows; r++) {
-        twoDimentionArray[r] = [];
+        twoDimensionArray[r] = [];
         for (let c = 0; c < cols; c++) {
-            twoDimentionArray[r][c] = "*";
+            twoDimensionArray[r][c] = "*";
         }
     }
-    console.log(twoDimentionArray);
+    return twoDimensionArray;
 }
 
 
-printStarArray(inputRows, inputCols);
+console.log(printStarArray(inputRows, inputCols));
