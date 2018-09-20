@@ -1,25 +1,22 @@
 /*
- * lesson1
- */
-
-const hello: string = "Hello, World";
-console.log(hello);
-
-
-/*
  * lesson2
  */
+var readline = require('readline-sync');
+
+var inputRows: number = readline.question('Enter Rows: ');
+var inputCols: number = readline.question('Enter Cols: ');
+
 
 function printStarArray(rows: number, cols: number): void {
-    const myarr: Array<Array<string>> = [];
+    const twoDimentionArray: Array<Array<string>> = [];
     for (let r = 0; r < rows; r++) {
-        myarr[r] = [];
+        twoDimentionArray[r] = [];
         for (let c = 0; c < cols; c++) {
-            myarr[r][c] = "*";
+            twoDimentionArray[r][c] = "*";
         }
     }
-    console.log(myarr);
+    console.log(twoDimentionArray);
 }
 
-printStarArray(4, 5);
 
+printStarArray(inputRows, inputCols);
