@@ -1,16 +1,19 @@
 {
-  "name": "lesson1",
+  "name": "lesson",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.ts",
-    "build": "tsc lesson1.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./src/index.ts",
+    "build": "tsc ./src/index.ts",
+    "test": "jest ./src/add.test.ts"
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.0",
     "typescript": "^3.0.3"
   }
 }
