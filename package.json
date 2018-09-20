@@ -9,8 +9,11 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
   "devDependencies": {
+    "@types/node": "^10.10.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
   }
