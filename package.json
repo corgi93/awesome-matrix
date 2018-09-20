@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.ts",
-    "build": "tsc ./src/index.ts",
-    "test": "jest ./src/add.test.ts"
+    "start": "ts-node ./src/index.ts",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +13,7 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "ts-jest": "^23.10.0",
+    "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
   }
 }
