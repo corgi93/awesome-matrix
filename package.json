@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,11 @@
     "readline-sync": "^1.4.9"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.2",
     "@types/node": "^10.10.1",
     "@types/readline-sync": "^1.4.3",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.0.3"
   }
