@@ -9,6 +9,11 @@ cache:
   paths:
     - node_modules
 
+build:
+  stage: build
+  script:
+  - npm build
+
 test:
   stage: test
   script:
