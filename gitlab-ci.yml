@@ -1,0 +1,18 @@
+image: node:8
+stages:
+  - test
+  - build
+
+cache:
+  paths:
+    - node_modules
+
+build:
+  stage: build
+  script:
+    - npm build
+
+test:
+  stage: test
+  script:
+    - npm run test
