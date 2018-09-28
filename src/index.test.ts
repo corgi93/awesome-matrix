@@ -1,5 +1,16 @@
-import { squareMatrix } from "./index";
+import { squareMatrix } from './squareMatrix'
 
-test("squareMatrix test", ()=>{
-
-})
+describe('squareMatrix test', () => {
+    it('should be 3 dgree matrix', () => {
+        expect(squareMatrix(3)).toEqual([["*", " ", " "],
+                                                           ["*", "*", " "],
+                                                           ["*", "*", "*"]])
+    });
+    it('should be 5 dgree matrix ', () => {
+        expect(squareMatrix(5)).toEqual([["*", " ", " ", " ", " "],
+                                                           ["*", "*", " ", " ", " "],
+                                                           ["*", "*", "*", " ", " "],
+                                                           ["*", "*", "*", "*", " "],
+                                                           ["*", "*", "*", "*", "*"]])
+    });
+});
