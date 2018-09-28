@@ -13,7 +13,7 @@ cache:
 build:
   stage: build
   script:
-  - npm build
+  - npm run build
 
 test:
   stage: test
