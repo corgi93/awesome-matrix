@@ -7,6 +7,23 @@
     "build": "tsc",
     "test": "jest"
   },
+  "globals": {
+    "ts-jest": {
+      "enableTsDiagnostics": true,
+      "tsConfigFile": "./tsconfig.json"
+    }
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "description": "",
