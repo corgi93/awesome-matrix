@@ -1,2 +1,1 @@
-# typescript-lesson
-
+typescript-lesson
