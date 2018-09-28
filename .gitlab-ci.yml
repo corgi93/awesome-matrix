@@ -1,0 +1,17 @@
+image: node:latest
+
+stages:
+    - build
+
+cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - node_modules/
+
+before_script:
+- npm install
+
+build:
+    stage: build
+    script:
+    - npm build
