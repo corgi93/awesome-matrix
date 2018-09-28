@@ -1,7 +1,7 @@
 import {squareMatrix} from './squareMatrix'
 
 describe('squareMatrix test', () => {
-    it('should be 3 dgree matrix when given input =  3', () => {
+    it('should be 3 dgree matrix when given input = 3', () => {
         expect(squareMatrix(3)).toEqual([
                 ["*", " ", " "],
                 ["*", "*", " "],
