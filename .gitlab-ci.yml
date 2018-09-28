@@ -1,5 +1,6 @@
 image: node:latest
 stages:
+  - build
   - test
 
 before_script:
