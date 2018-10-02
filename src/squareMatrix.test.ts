@@ -1,61 +1,54 @@
-import {fifthMatrix, firstMatrix, fourthMatrix, secondMatrix, squareMatrix, thirdMatrix} from './squareMatrix'
+import { squareMatrix } from './squareMatrix'
 
 describe('squareMatrix test', () => {
-    it('should  be 7 degree matrix when given 7 in the firstMatrix()', ()=>{
-        expect(firstMatrix(7)).toEqual([
-            [ '*', ' ', ' ', ' ', ' ', ' ', ' ' ],
-            [ '*', '*', ' ', ' ', ' ', ' ', ' ' ],
-            [ '*', '*', '*', ' ', ' ', ' ', ' ' ],
-            [ '*', '*', '*', '*', ' ', ' ', ' ' ],
-            [ '*', '*', '*', '*', '*', ' ', ' ' ],
-            [ '*', '*', '*', '*', '*', '*', ' ' ],
-            [ '*', '*', '*', '*', '*', '*', '*' ]
+    it('should  be 7 degree matrix when given degree = 7 & pattern = leftUpwardRightTriangle ', () => {
+        expect(squareMatrix(7,1)).toEqual([
+            ['*', ' ', ' ', ' ', ' ', ' ', ' '],
+            ['*', '*', ' ', ' ', ' ', ' ', ' '],
+            ['*', '*', '*', ' ', ' ', ' ', ' '],
+            ['*', '*', '*', '*', ' ', ' ', ' '],
+            ['*', '*', '*', '*', '*', ' ', ' '],
+            ['*', '*', '*', '*', '*', '*', ' '],
+            ['*', '*', '*', '*', '*', '*', '*']
         ]);
     });
-    it('should  be 4 degree matrix when given  4 in the secondMatrix()', ()=>{
-        expect(secondMatrix(4)).toEqual([
-            [ ' ', ' ', ' ', '*'],
-            [ ' ', ' ', '*', '*'],
-            [ ' ', '*', '*', '*'],
-            [ '*', '*', '*', '*'],
-        ]);
-    });
-
-    it('should  be 5 degree matrix when given  4 in the secondMatrix()', ()=>{
-        expect(thirdMatrix(5)).toEqual([
-            [ ' ', ' ', '*', ' ', ' '],
-            [ ' ', '*', '*', '*', ' '],
-            [ '*', '*', '*', '*', '*'],
-            [ ' ', ' ', ' ', ' ', ' '],
-            [ ' ', ' ', ' ', ' ', ' '],
+    it('should  be 4 degree matrix when given degree = 4 & pattern = rightUpwardRightTriangle', () => {
+        expect(squareMatrix(4,2)).toEqual([
+            [' ', ' ', ' ', '*'],
+            [' ', ' ', '*', '*'],
+            [' ', '*', '*', '*'],
+            ['*', '*', '*', '*'],
         ]);
     });
 
-    it('should  be 6 degree matrix when given  6 in the fourthMatrix()', ()=>{
-        expect(fourthMatrix(6)).toEqual([
-            [ '*', '*', '*', '*','*','*'],
-            [ '*', '*', '*', '*','*',' '],
-            [ '*', '*', '*', '*',' ',' '],
-            [ '*', '*', '*', ' ',' ',' '],
-            [ '*', '*', ' ', ' ',' ',' '],
-            [ '*', ' ', ' ', ' ',' ',' '],
+    it('should  be 5 degree matrix when given degree = 5 & pattern = pyramidMatrix', () => {
+        expect(squareMatrix(5,3)).toEqual([
+            [' ', ' ', '*', ' ', ' '],
+            [' ', '*', '*', '*', ' '],
+            ['*', '*', '*', '*', '*'],
+            [' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' '],
         ]);
     });
-    it('should  be 6 degree matrix when given  6 in the fifthMatrix()', ()=>{
-        expect(fifthMatrix(6)).toEqual([
-            [ '*', '*', '*', '*','*','*'],
-            [ ' ','*', '*', '*', '*','*'],
-            [ ' ', ' ', '*', '*','*','*'],
-            [ ' ', ' ', ' ', '*','*','*'],
-            [ ' ', ' ', ' ', ' ','*','*'],
-            [ ' ', ' ', ' ', ' ',' ','*'],
+
+    it('should  be 6 degree matrix when given degree = 6 & pattern = leftDownwardRightTriangle', () => {
+        expect(squareMatrix(6,4)).toEqual([
+            ['*', '*', '*', '*', '*', '*'],
+            ['*', '*', '*', '*', '*', ' '],
+            ['*', '*', '*', '*', ' ', ' '],
+            ['*', '*', '*', ' ', ' ', ' '],
+            ['*', '*', ' ', ' ', ' ', ' '],
+            ['*', ' ', ' ', ' ', ' ', ' '],
         ]);
     });
-    it('should be 3 dgree matrix when given input = 3', () => {
-        expect(squareMatrix(3)).toEqual([
-            ["*", "*", "*"],
-            ["*", "*", "*"],
-            ["*", "*", "*"]
+    it('should  be 6 degree matrix when given degree = 6 & pattern = rightDownwardRightTriangle', () => {
+        expect(squareMatrix(6,5)).toEqual([
+            ['*', '*', '*', '*', '*', '*'],
+            [' ', '*', '*', '*', '*', '*'],
+            [' ', ' ', '*', '*', '*', '*'],
+            [' ', ' ', ' ', '*', '*', '*'],
+            [' ', ' ', ' ', ' ', '*', '*'],
+            [' ', ' ', ' ', ' ', ' ', '*'],
         ]);
     });
 });

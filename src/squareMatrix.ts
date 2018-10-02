@@ -1,6 +1,28 @@
+enum MatrixInfo {
+    leftUpwardRightTriangle = 1,
+    rightUpwardRightTriangle,
+    pyramidMatrix,
+    leftDownwardRightTriangle,
+    rightDownwardRightTriangle
+}
+
+export function squareMatrix(degree: number, pattern: MatrixInfo): any {
+    switch (pattern) {
+        case 1:
+            return leftUpwardRightTriangle(degree);
+        case 2:
+            return rightUpwardRightTriangle(degree);
+        case 3:
+            return pyramidMatrix(degree);
+        case 4:
+            return leftDownwardRightTriangle(degree);
+        case 5:
+            return rightDownwardRightTriangle(degree);
+    }
+}
+
 //첫 번째 패턴
-export function firstMatrix(degree: number): Array<Array<string>> {
-    console.log("firstdMatrix");
+function leftUpwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
 
     for (let r = 0; r < degree; r++) {
@@ -16,12 +38,9 @@ export function firstMatrix(degree: number): Array<Array<string>> {
     return twoDimensionArray;
 }
 
-
 //두 번째 패턴
-export function secondMatrix(degree: number): Array<Array<string>> {
-    console.log("secondMatrix");
+function rightUpwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
-
     for (let r = 0; r < degree; r++) {
         twoDimensionArray[r] = [];
         for (let c = 0; c < degree; c++) {
@@ -35,23 +54,21 @@ export function secondMatrix(degree: number): Array<Array<string>> {
     return twoDimensionArray;
 }
 
-
 // 세 번쨰 패턴
-export function thirdMatrix(degree: number): Array<Array<string>> {
-    console.log("thirdMatrix");
+function pyramidMatrix(degree: number): Array<Array<string>> {
+    const floor = Math.floor(degree / 2);
+    const twoDimensionArray: Array<Array<string>> = [];
 
     if (degree % 2 == 0) {
         throw new Error('even degree could not make pyramid');
     }
-    const floor = Math.floor(degree / 2); //floor =2
-    const twoDimensionArray: Array<Array<string>> = [];
     try {
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = [];
             for (let c = 0; c < degree; c++) {
                 const sum = r + c;
                 const sub = c - r;
-                //row값이 0과 2의 배수일 경우만 조건부 별 찍기. 2*r-1인 경우는 공백 출력.
+
                 if (r <= floor) {
                     if ((sum >= floor) && (sub <= floor)) {
                         twoDimensionArray[r][c] = "*";
@@ -70,8 +87,7 @@ export function thirdMatrix(degree: number): Array<Array<string>> {
 }
 
 //네 번째 패턴
-export function fourthMatrix(degree: number): Array<Array<string>> {
-    console.log("foutrh Matrix");
+function leftDownwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
 
     for (let r = 0; r < degree; r++) {
@@ -88,9 +104,9 @@ export function fourthMatrix(degree: number): Array<Array<string>> {
 }
 
 //다섯 번째 패턴
-export function fifthMatrix(degree: number): Array<Array<string>> {
-    console.log("fifthMatrix");
+function rightDownwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
+
     for (let r = 0; r < degree; r++) {
         twoDimensionArray[r] = [];
         for (let c = 0; c < degree; c++) {
@@ -99,20 +115,6 @@ export function fifthMatrix(degree: number): Array<Array<string>> {
             } else {
                 twoDimensionArray[r][c] = "*";
             }
-        }
-    }
-    return twoDimensionArray;
-}
-
-
-// 기본 정방행렬
-export function squareMatrix(degree: number): Array<Array<string>> {
-    console.log("basic square Matrix");
-    const twoDimensionArray: Array<Array<string>> = [];
-    for (let r = 0; r < degree; r++) {
-        twoDimensionArray[r] = [];
-        for (let c = 0; c < degree; c++) {
-            twoDimensionArray[r][c] = "*";
         }
     }
     return twoDimensionArray;

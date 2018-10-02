@@ -1,17 +1,15 @@
 import readline from "readline-sync";
-import {fifthMatrix, firstMatrix, fourthMatrix, secondMatrix, squareMatrix, thirdMatrix} from "./squareMatrix";
+import {squareMatrix} from "./squareMatrix";
 
-const inputNumber: string = readline.question("Enter number: ");
+const inputNumber: string = readline.question("Enter pattern(case 1 - 5): ");
+const inputDegree: string = readline.question("Enter degree: ");
 const value = Number(inputNumber);
+const degree = Number(inputDegree);
 
 if (isNaN(value)) {
     console.log("this is not a number. please enter number");
 } else if (value) {
-    console.log(squareMatrix(value));
-    console.log(firstMatrix(value));
-    console.log(secondMatrix(value));
-    console.log(thirdMatrix(value));
-    console.log(fourthMatrix(value));
-    console.log(fifthMatrix(value));
+    console.log(squareMatrix(degree, value));
+
 }
 
