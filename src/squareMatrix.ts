@@ -22,7 +22,6 @@ export function squareMatrix(degree: number, pattern: MatrixInfo): Array<Array<s
 //첫 번째 패턴
 function leftUpwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
-
     for (let r = 0; r < degree; r++) {
         twoDimensionArray[r] = [];
         for (let c = 0; c < degree; c++) {
@@ -75,7 +74,6 @@ function pyramidMatrix(degree: number): Array<Array<string>> {
     }
     return twoDimensionArray;
 }
-
 //네 번째 패턴
 function leftDownwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
