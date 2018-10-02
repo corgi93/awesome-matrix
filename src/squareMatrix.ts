@@ -1,22 +1,22 @@
 enum MatrixInfo {
-    leftUpwardRightTriangle,
-    rightUpwardRightTriangle,
-    pyramidMatrix,
-    leftDownwardRightTriangle,
-    rightDownwardRightTriangle
+    LeftUpwardRightTriangle,
+    RightUpwardRightTriangle,
+    PyramidMatrix,
+    LeftDownwardRightTriangle,
+    RightDownwardRightTriangle
 }
 
 export function squareMatrix(degree: number, pattern: MatrixInfo): Array<Array<string>> {
     switch (pattern) {
-        case MatrixInfo.leftUpwardRightTriangle:
+        case MatrixInfo.LeftUpwardRightTriangle:
             return leftUpwardRightTriangle(degree);
-        case MatrixInfo.rightUpwardRightTriangle:
+        case MatrixInfo.RightUpwardRightTriangle:
             return rightUpwardRightTriangle(degree);
-        case MatrixInfo.pyramidMatrix:
+        case MatrixInfo.PyramidMatrix:
             return pyramidMatrix(degree);
-        case MatrixInfo.leftDownwardRightTriangle:
+        case MatrixInfo.LeftDownwardRightTriangle:
             return leftDownwardRightTriangle(degree);
-        case MatrixInfo.rightDownwardRightTriangle:
+        case MatrixInfo.RightDownwardRightTriangle:
             return rightDownwardRightTriangle(degree);
     }
 }
