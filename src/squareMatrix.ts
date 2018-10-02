@@ -1,22 +1,22 @@
 enum MatrixInfo {
-    leftUpwardRightTriangle = 1,
+    leftUpwardRightTriangle,
     rightUpwardRightTriangle,
     pyramidMatrix,
     leftDownwardRightTriangle,
     rightDownwardRightTriangle
 }
 
-export function squareMatrix(degree: number, pattern: MatrixInfo): any {
+export function squareMatrix(degree: number, pattern: MatrixInfo): Array<Array<string>> {
     switch (pattern) {
-        case 1:
+        case MatrixInfo.leftUpwardRightTriangle:
             return leftUpwardRightTriangle(degree);
-        case 2:
+        case MatrixInfo.rightUpwardRightTriangle:
             return rightUpwardRightTriangle(degree);
-        case 3:
+        case MatrixInfo.pyramidMatrix:
             return pyramidMatrix(degree);
-        case 4:
+        case MatrixInfo.leftDownwardRightTriangle:
             return leftDownwardRightTriangle(degree);
-        case 5:
+        case MatrixInfo.rightDownwardRightTriangle:
             return rightDownwardRightTriangle(degree);
     }
 }
@@ -62,7 +62,7 @@ function pyramidMatrix(degree: number): Array<Array<string>> {
     if (degree % 2 == 0) {
         throw new Error('even degree could not make pyramid');
     }
-    try {
+
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = [];
             for (let c = 0; c < degree; c++) {
@@ -80,9 +80,7 @@ function pyramidMatrix(degree: number): Array<Array<string>> {
                 }
             }
         }
-    } catch (e) {
-        console.log(e);
-    }
+
     return twoDimensionArray;
 }
 
