@@ -1,14 +1,15 @@
 image: node:latest
 stages:
-  - build
-  - test
+- build
+- test
+- lint
 
 before_script:
-  - npm install
+- npm install
 
 cache:
   paths:
-    - node_modules
+  - node_modules
 
 build:
   stage: build
@@ -18,4 +19,9 @@ build:
 test:
   stage: test
   script:
-    - npm test
+  - npm test
+
+lint:
+  stage: lint
+  script:
+  - yarn lint
