@@ -5,6 +5,7 @@ enum MatrixInfo {
     LeftDownwardRightTriangle,
     RightDownwardRightTriangle
 }
+
 export function squareMatrix(degree: number, pattern: MatrixInfo): Array<Array<string>> {
     switch (pattern) {
         case MatrixInfo.LeftUpwardRightTriangle:
@@ -19,6 +20,7 @@ export function squareMatrix(degree: number, pattern: MatrixInfo): Array<Array<s
             return rightDownwardRightTriangle(degree);
     }
 }
+
 //첫 번째 패턴
 function leftUpwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
@@ -34,6 +36,7 @@ function leftUpwardRightTriangle(degree: number): Array<Array<string>> {
     }
     return twoDimensionArray;
 }
+
 //두 번째 패턴
 function rightUpwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
@@ -49,6 +52,7 @@ function rightUpwardRightTriangle(degree: number): Array<Array<string>> {
     }
     return twoDimensionArray;
 }
+
 // 세 번쨰 패턴
 function pyramidMatrix(degree: number): Array<Array<string>> {
     const floor = Math.floor(degree / 2);
@@ -74,6 +78,7 @@ function pyramidMatrix(degree: number): Array<Array<string>> {
     }
     return twoDimensionArray;
 }
+
 //네 번째 패턴
 function leftDownwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
@@ -89,6 +94,7 @@ function leftDownwardRightTriangle(degree: number): Array<Array<string>> {
     }
     return twoDimensionArray;
 }
+
 //다섯 번째 패턴
 function rightDownwardRightTriangle(degree: number): Array<Array<string>> {
     const twoDimensionArray: Array<Array<string>> = [];
