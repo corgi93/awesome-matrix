@@ -1,7 +1,7 @@
 import readline from 'readline-sync'
 import { Matrix } from './squareMatrix'
 
-const patterns = new Matrix()
+const matrix = new Matrix()
 
 const inputPattern: string = readline.question('Enter pattern(case 0 - 4): ')
 const inputDegree: string = readline.question('Enter degree: ')
@@ -13,5 +13,5 @@ if (isNaN(inputNumberPattern && inputNumberDegree)) {
 } else if (inputNumberPattern < 0 || inputNumberPattern > 4) {
     console.log('please enter a pattern number between 0 and 4')
 } else {
-    console.log(patterns.squareMatrix(inputNumberDegree, inputNumberPattern))
+    console.log(matrix.squareMatrix(inputNumberDegree, inputNumberPattern))
 }
