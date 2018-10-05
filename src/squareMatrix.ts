@@ -22,7 +22,7 @@ export class Matrix {
         }
     }
 
-    public leftUpwardRightTriangle(degree: number): string[][] {
+    protected leftUpwardRightTriangle(degree: number): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []
@@ -37,7 +37,7 @@ export class Matrix {
         return twoDimensionArray
     }
 
-    public rightUpwardRightTriangle(degree: number): string[][] {
+    protected rightUpwardRightTriangle(degree: number): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []
@@ -52,7 +52,7 @@ export class Matrix {
         return twoDimensionArray
     }
 
-    public pyramidMatrix(degree: number): string[][] {
+    protected pyramidMatrix(degree: number): string[][] {
         const floor = Math.floor(degree / 2)
         const twoDimensionArray: string[][] = []
         if (degree % 2 === 0) {
@@ -77,7 +77,7 @@ export class Matrix {
         return twoDimensionArray
     }
 
-    public leftDownwardRightTriangle(degree: number): string[][] {
+    protected leftDownwardRightTriangle(degree: number): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []
@@ -92,7 +92,7 @@ export class Matrix {
         return twoDimensionArray
     }
 
-    public rightDownwardRightTriangle(degree: number): string[][] {
+    protected rightDownwardRightTriangle(degree: number): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []
