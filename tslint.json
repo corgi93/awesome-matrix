@@ -3,6 +3,7 @@
     "extends": ["tslint:recommended", "prettier"],
     "rules": {
         "semicolon": false,
-        "quotemark": [true, "single"]
+        "quotemark": [true, "single"],
+        "interface-name": [true, "never-prefix"]
     }
 }
