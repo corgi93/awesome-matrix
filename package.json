@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "start": "ts-node ./src/index.ts",
+        "start": "ts-node ./src/squareMatrix.ts",
         "build": "tsc",
         "test": "jest",
         "lint": "tslint --project ."
