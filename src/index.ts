@@ -1,17 +1,18 @@
-import readline from 'readline-sync'
+import { LeftDownwardRightTriangle } from './patterns/leftDownwardRightTriangle'
+import { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
+import { PyramidTriangle } from './patterns/pyramidTriangle'
+import { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangle'
+import { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
 import { Matrix } from './squareMatrix'
 
-const matrix = new Matrix()
+const leftUpwardRightTriangle = new Matrix(5, new LeftUpwardRightTriangle())
+const rightUpwardRightTriangle = new Matrix('%', new RightUpwardRightTriangle())
+const pyramidTriangle = new Matrix('+', new PyramidTriangle())
+const leftDownwardRightTriangle = new Matrix('K', new LeftDownwardRightTriangle())
+const rightDownwardRightTriangle = new Matrix('*', new RightDownwardRightTriangle())
 
-const inputPattern: string = readline.question('Enter pattern(case 0 - 4): ')
-const inputDegree: string = readline.question('Enter degree: ')
-const inputNumberPattern = Number(inputPattern)
-const inputNumberDegree = Number(inputDegree)
-
-if (isNaN(inputNumberPattern && inputNumberDegree)) {
-    console.log('patterns and degree must be a number.')
-} else if (inputNumberPattern < 0 || inputNumberPattern > 4) {
-    console.log('please enter a pattern number between 0 and 4')
-} else {
-    console.log(matrix.squareMatrix(inputNumberDegree, inputNumberPattern))
-}
+leftUpwardRightTriangle.executePattern(4)
+rightUpwardRightTriangle.executePattern(7)
+pyramidTriangle.executePattern(7)
+leftDownwardRightTriangle.executePattern(9)
+rightDownwardRightTriangle.executePattern(6)
