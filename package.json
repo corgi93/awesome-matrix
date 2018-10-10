@@ -19,7 +19,8 @@
             "^.+\\.ts?$": "ts-jest"
         },
         "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
-        "moduleFileExtensions": ["ts", "js", "json"]
+        "moduleFileExtensions": ["ts", "js", "json"],
+        "moduleDirectories": ["<rootDir>/src", "node_modules"]
     },
     "author": "",
     "license": "ISC",
