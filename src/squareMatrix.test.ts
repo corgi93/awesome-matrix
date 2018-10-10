@@ -1,15 +1,14 @@
-import {
-    LeftDownwardRightTriangle,
-    LeftUpwardRightTriangle,
-    PyramidTriangle,
-    RightDownwardRightTriangle,
-    RightUpwardRightTriangle,
-} from './squareMatrix'
+import { LeftDownwardRightTriangle } from './LeftDownwardRightTriangle'
+import { LeftUpwardRightTriangle } from './LeftUpwardRightTriangle'
+import { PyramidTriangle } from './PyramidTriangle'
+import { RightDownwardRightTriangle } from './RightDownwardRightTriangle'
+import { RightUpwardRightTriangle } from './RightUpwardRightTriangle'
+import { Matrix } from './squareMatrix'
 
 describe('squareMatrix test', () => {
     it('should be 7 degree matrix printing `%` when given degree = 7 & pattern is leftUpwardRightTriangle ', () => {
-        const leftUpwardRightTriangle = new LeftUpwardRightTriangle('%')
-        expect(leftUpwardRightTriangle.twoDimensionArrayLogic(7)).toEqual([
+        const matrix1 = new Matrix('$', new LeftUpwardRightTriangle())
+        expect(matrix1.executePattern(7)).toEqual([
             ['%', ' ', ' ', ' ', ' ', ' ', ' '],
             ['%', '%', ' ', ' ', ' ', ' ', ' '],
             ['%', '%', '%', ' ', ' ', ' ', ' '],
@@ -20,8 +19,8 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 4 degree matrix printing `@` when given degree = 4 & pattern is rightUpwardRightTriangle', () => {
-        const rightUpwardRightTriangle = new RightUpwardRightTriangle('@')
-        expect(rightUpwardRightTriangle.twoDimensionArrayLogic(4)).toEqual([
+        const matrix2 = new Matrix('%', new RightUpwardRightTriangle())
+        expect(matrix2.executePattern(4)).toEqual([
             [' ', ' ', ' ', '@'],
             [' ', ' ', '@', '@'],
             [' ', '@', '@', '@'],
@@ -29,8 +28,8 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 5 degree matrix printing `K` when given degree = 5 & pattern is pyramidMatrix', () => {
-        const pyramidTriangle = new PyramidTriangle('K')
-        expect(pyramidTriangle.twoDimensionArrayLogic(5)).toEqual([
+        const matrix3 = new Matrix('+', new PyramidTriangle())
+        expect(matrix3.executePattern(5)).toEqual([
             [' ', ' ', 'K', ' ', ' '],
             [' ', 'K', 'K', 'K', ' '],
             ['K', 'K', 'K', 'K', 'K'],
@@ -39,8 +38,8 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 6 degree matrix printing `$` when given degree = 6 & pattern is leftDownwardRightTriangle', () => {
-        const leftDownwardRightTriangle = new LeftDownwardRightTriangle('$')
-        expect(leftDownwardRightTriangle.twoDimensionArrayLogic(6)).toEqual([
+        const matrix4 = new Matrix('K', new LeftDownwardRightTriangle())
+        expect(matrix4.executePattern(6)).toEqual([
             ['$', '$', '$', '$', '$', '$'],
             ['$', '$', '$', '$', '$', ' '],
             ['$', '$', '$', '$', ' ', ' '],
@@ -50,8 +49,8 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 6 degree matrix printing `*` when given degree = 6 & pattern is rightDownwardRightTriangle', () => {
-        const rightDownwardRightTriangle = new RightDownwardRightTriangle('*')
-        expect(rightDownwardRightTriangle.twoDimensionArrayLogic(6)).toEqual([
+        const matrix5 = new Matrix('?', new RightDownwardRightTriangle())
+        expect(matrix5.executePattern(6)).toEqual([
             ['*', '*', '*', '*', '*', '*'],
             [' ', '*', '*', '*', '*', '*'],
             [' ', ' ', '*', '*', '*', '*'],

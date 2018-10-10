@@ -3,7 +3,6 @@
     "extends": ["tslint:recommended", "prettier"],
     "rules": {
         "semicolon": false,
-        "quotemark": [true, "single"],
-        "max-classes-per-file": [true]
+        "quotemark": [true, "single"]
     }
 }

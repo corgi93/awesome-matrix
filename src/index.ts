@@ -1,19 +1,18 @@
-import {
-    LeftDownwardRightTriangle,
-    LeftUpwardRightTriangle,
-    PyramidTriangle,
-    RightDownwardRightTriangle,
-    RightUpwardRightTriangle,
-} from './squareMatrix'
+import { LeftDownwardRightTriangle } from './LeftDownwardRightTriangle'
+import { LeftUpwardRightTriangle } from './LeftUpwardRightTriangle'
+import { PyramidTriangle } from './PyramidTriangle'
+import { RightDownwardRightTriangle } from './RightDownwardRightTriangle'
+import { RightUpwardRightTriangle } from './RightUpwardRightTriangle'
+import { Matrix } from './squareMatrix'
 
-const leftUpwardRightTriangle = new LeftUpwardRightTriangle('#')
-const rightUpwardRightTriangle = new RightUpwardRightTriangle('^^')
-const pyramidTriangle = new PyramidTriangle('$')
-const leftDownwardRightTriangle = new LeftDownwardRightTriangle('P')
-const rightDownwardRightTriangle = new RightDownwardRightTriangle('%')
+const matrix1 = new Matrix('$', new LeftUpwardRightTriangle())
+const matrix2 = new Matrix('%', new RightUpwardRightTriangle())
+const matrix3 = new Matrix('+', new PyramidTriangle())
+const matrix4 = new Matrix('K', new LeftDownwardRightTriangle())
+const matrix5 = new Matrix('?', new RightDownwardRightTriangle())
 
-leftUpwardRightTriangle.twoDimensionArrayLogic(4)
-rightUpwardRightTriangle.twoDimensionArrayLogic(7)
-pyramidTriangle.twoDimensionArrayLogic(7)
-leftDownwardRightTriangle.twoDimensionArrayLogic(6)
-rightDownwardRightTriangle.twoDimensionArrayLogic(5)
+console.log(matrix1.executePattern(4))
+console.log(matrix2.executePattern(7))
+console.log(matrix3.executePattern(7))
+console.log(matrix4.executePattern(6))
+console.log(matrix5.executePattern(5))
