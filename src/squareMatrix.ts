@@ -1,5 +1,5 @@
 export interface IMatrixStrategy {
-    twoDimensionArrayLogic(degree: number): string[][]
+    twoDimensionArrayLogic(degree: number, stringShape: string): string[][]
 }
 
 export class Matrix {
@@ -11,6 +11,6 @@ export class Matrix {
         this.pattern = pattern
     }
     public executePattern(degree: number) {
-        return this.pattern.twoDimensionArrayLogic(degree)
+        return this.pattern.twoDimensionArrayLogic(degree, this.stringShape)
     }
 }
