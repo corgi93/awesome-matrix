@@ -1,4 +1,4 @@
-import { IMatrixStrategy } from './squareMatrix'
+import { IMatrixStrategy } from 'squareMatrix'
 
 export class PyramidTriangle implements IMatrixStrategy {
     public twoDimensionArrayLogic(
