@@ -1,7 +1,7 @@
 import { IMatrixStrategy } from './squareMatrix'
 
 export class RightDownwardRightTriangle implements IMatrixStrategy {
-    public twoDimensionArrayLogic(degree: number): string[][] {
+    public twoDimensionArrayLogic(degree: number, stringShape: string): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []
@@ -9,7 +9,7 @@ export class RightDownwardRightTriangle implements IMatrixStrategy {
                 if (c < r) {
                     twoDimensionArray[r][c] = ' '
                 } else {
-                    twoDimensionArray[r][c] = '*'
+                    twoDimensionArray[r][c] = stringShape
                 }
             }
         }
