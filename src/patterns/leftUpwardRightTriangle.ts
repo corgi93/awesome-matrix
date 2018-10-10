@@ -1,10 +1,7 @@
 import { IMatrixStrategy } from 'squareMatrix'
 
 export class LeftUpwardRightTriangle implements IMatrixStrategy {
-    public twoDimensionArrayLogic(
-        degree: number,
-        stringShape: string,
-    ): string[][] {
+    public twoDimensionArrayLogic(degree: number, stringShape: string): string[][] {
         const twoDimensionArray: string[][] = []
         for (let r = 0; r < degree; r++) {
             twoDimensionArray[r] = []

@@ -1,10 +1,7 @@
 import { IMatrixStrategy } from 'squareMatrix'
 
 export class PyramidTriangle implements IMatrixStrategy {
-    public twoDimensionArrayLogic(
-        degree: number,
-        stringShape: string,
-    ): string[][] {
+    public twoDimensionArrayLogic(degree: number, stringShape: string): string[][] {
         const floor = Math.floor(degree / 2)
         const twoDimensionArray: string[][] = []
         if (degree % 2 === 0) {
