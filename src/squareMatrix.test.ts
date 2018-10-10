@@ -6,7 +6,7 @@ import { RightUpwardRightTriangle } from 'patterns/rightUpwardRightTriangle'
 import { Matrix } from 'squareMatrix'
 
 describe('squareMatrix test', () => {
-    it('should be 7 degree matrix when given degree = 7 & pattern = leftUpwardRightTriangle ', () => {
+    it('should be 7 degree matrix when given degree = 7 & pattern = leftUpwardRightTriangle', () => {
         const matrix = new Matrix('*', new LeftUpwardRightTriangle())
         expect(matrix.executePattern(7)).toEqual([
             ['*', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -59,13 +59,8 @@ describe('squareMatrix test', () => {
             [' ', ' ', ' ', ' ', ' ', '*'],
         ])
     })
-
-    // strategy patterns
-    it('should be 7 degree matrix printing `%` when given degree = 7 & pattern = leftUpwardRightTriangle ', () => {
-        const leftUpwardRightTriangle = new Matrix(
-            '%',
-            new LeftUpwardRightTriangle(),
-        )
+    it('should be 7 degree matrix printing `%` when given degree = 7 & pattern = leftUpwardRightTriangle', () => {
+        const leftUpwardRightTriangle = new Matrix('%', new LeftUpwardRightTriangle())
         expect(leftUpwardRightTriangle.executePattern(7)).toEqual([
             ['%', ' ', ' ', ' ', ' ', ' ', ' '],
             ['%', '%', ' ', ' ', ' ', ' ', ' '],
@@ -77,10 +72,7 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 4 degree matrix printing `@` when given degree = 4 & pattern = rightUpwardRightTriangle', () => {
-        const rightUpwardRightTriangle = new Matrix(
-            '@',
-            new RightUpwardRightTriangle(),
-        )
+        const rightUpwardRightTriangle = new Matrix('@', new RightUpwardRightTriangle())
         expect(rightUpwardRightTriangle.executePattern(4)).toEqual([
             [' ', ' ', ' ', '@'],
             [' ', ' ', '@', '@'],
@@ -99,10 +91,7 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 6 degree matrix printing `$` when given degree = 6 & pattern = leftDownwardRightTriangle', () => {
-        const leftDownwardRightTriangle = new Matrix(
-            '$',
-            new LeftDownwardRightTriangle(),
-        )
+        const leftDownwardRightTriangle = new Matrix('$', new LeftDownwardRightTriangle())
         expect(leftDownwardRightTriangle.executePattern(6)).toEqual([
             ['$', '$', '$', '$', '$', '$'],
             ['$', '$', '$', '$', '$', ' '],
@@ -113,10 +102,7 @@ describe('squareMatrix test', () => {
         ])
     })
     it('should be 6 degree matrix printing `*` when given degree = 6 & pattern is rightDownwardRightTriangle', () => {
-        const rightDownwardRightTriangle = new Matrix(
-            '*',
-            new RightDownwardRightTriangle(),
-        )
+        const rightDownwardRightTriangle = new Matrix('*', new RightDownwardRightTriangle())
         expect(rightDownwardRightTriangle.executePattern(6)).toEqual([
             ['*', '*', '*', '*', '*', '*'],
             [' ', '*', '*', '*', '*', '*'],
