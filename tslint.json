@@ -4,6 +4,6 @@
     "rules": {
         "semicolon": false,
         "quotemark": [true, "single"],
-        "interface-name": [true, "never-prefix"]
+        "max-classes-per-file": [true]
     }
 }
