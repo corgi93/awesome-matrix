@@ -5,14 +5,14 @@ import { RightDownwardRightTriangle } from './RightDownwardRightTriangle'
 import { RightUpwardRightTriangle } from './RightUpwardRightTriangle'
 import { Matrix } from './squareMatrix'
 
-const matrix1 = new Matrix('$', new LeftUpwardRightTriangle())
-const matrix2 = new Matrix('%', new RightUpwardRightTriangle())
-const matrix3 = new Matrix('+', new PyramidTriangle())
-const matrix4 = new Matrix('K', new LeftDownwardRightTriangle())
-const matrix5 = new Matrix('?', new RightDownwardRightTriangle())
+const leftUpwardRightTriangle = new Matrix('$', new LeftUpwardRightTriangle())
+const rightUpwardRightTriangle = new Matrix('%', new RightUpwardRightTriangle())
+const pyramidTriangle = new Matrix('+', new PyramidTriangle())
+const leftDownwardRightTriangle = new Matrix('K', new LeftDownwardRightTriangle())
+const rightDownwardRightTriangle = new Matrix('?', new RightDownwardRightTriangle())
 
-matrix1.executePattern(4)
-matrix2.executePattern(7)
-matrix3.executePattern(7)
-matrix4.executePattern(6)
-matrix5.executePattern(5)
+leftUpwardRightTriangle.executePattern(4)
+rightUpwardRightTriangle.executePattern(7)
+pyramidTriangle.executePattern(7)
+leftDownwardRightTriangle.executePattern(6)
+rightDownwardRightTriangle.executePattern(5)
