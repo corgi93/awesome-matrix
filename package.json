@@ -21,8 +21,8 @@
     "jest": {
         "globals": {
             "ts-jest": {
-                "enableTsDiagnostics": true,
-                "tsConfigFile": "./tsconfig.json"
+                "diagnostics": true,
+                "ts-jest.tsConfig": "./tsconfig.json"
             }
         },
         "transform": {
