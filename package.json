@@ -6,7 +6,17 @@
         "start": "ts-node ./src/index.ts",
         "build": "tsc",
         "test": "jest",
-        "lint": "tslint --project ."
+        "lint": "tslint --project .",
+        "precommit": "lint-staged"
+    },
+    "hysky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts}": ["tslint --fix", "prettier --write", "git add"],
+        "*.json": ["prettier --write", "git add"]
     },
     "globals": {
         "ts-jest": {
@@ -19,15 +29,8 @@
             "^.+\\.ts?$": "ts-jest"
         },
         "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
-        "moduleFileExtensions": [
-            "ts",
-            "js",
-            "json"
-        ],
-        "moduleDirectories": [
-            "<rootDir>/src",
-            "node_modules"
-        ]
+        "moduleFileExtensions": ["ts", "js", "json"],
+        "moduleDirectories": ["<rootDir>/src", "node_modules"]
     },
     "author": "",
     "license": "ISC",
@@ -39,7 +42,9 @@
         "@types/jest": "^23.3.2",
         "@types/node": "^10.10.1",
         "@types/readline-sync": "^1.4.3",
+        "husky": "^1.1.1",
         "jest": "^23.6.0",
+        "lint-staged": "^7.3.0",
         "prettier": "1.14.3",
         "ts-jest": "^23.10.1",
         "ts-node": "^7.0.1",
