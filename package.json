@@ -22,7 +22,7 @@
         "globals": {
             "ts-jest": {
                 "diagnostics": true,
-                "ts-jest.tsConfig": "./tsconfig.json"
+                "tsConfig": "./tsconfig.json"
             }
         },
         "transform": {
