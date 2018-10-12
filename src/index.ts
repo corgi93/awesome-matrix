@@ -3,13 +3,13 @@ import { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
 import { PyramidTriangle } from './patterns/pyramidTriangle'
 import { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangle'
 import { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
-import { Matrix } from './squareMatrix'
+import { SquareMatrix } from './squareMatrix'
 
-const leftUpwardRightTriangle = new Matrix(5, new LeftUpwardRightTriangle())
-const rightUpwardRightTriangle = new Matrix('%', new RightUpwardRightTriangle())
-const pyramidTriangle = new Matrix('+', new PyramidTriangle())
-const leftDownwardRightTriangle = new Matrix('K', new LeftDownwardRightTriangle())
-const rightDownwardRightTriangle = new Matrix('*', new RightDownwardRightTriangle())
+const leftUpwardRightTriangle = new SquareMatrix(5, new LeftUpwardRightTriangle())
+const rightUpwardRightTriangle = new SquareMatrix('%', new RightUpwardRightTriangle())
+const pyramidTriangle = new SquareMatrix('+', new PyramidTriangle())
+const leftDownwardRightTriangle = new SquareMatrix('K', new LeftDownwardRightTriangle())
+const rightDownwardRightTriangle = new SquareMatrix('*', new RightDownwardRightTriangle())
 
 leftUpwardRightTriangle.executePattern(4)
 rightUpwardRightTriangle.executePattern(7)

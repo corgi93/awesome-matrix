@@ -2,7 +2,7 @@ export interface IMatrixStrategy {
     twoDimensionArrayLogic(degree: number, stringShape: string | number): string[][]
 }
 
-export class Matrix {
+export class SquareMatrix {
     private readonly shapeCharacter: string | number
     private readonly pattern: IMatrixStrategy
 
