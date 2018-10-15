@@ -4,6 +4,7 @@
     "useTabs": false,
     "printWidth": 100,
     "tabWidth": 4,
+    "trailingComma": "all",
     "overrides": [
         {
             "files": "*.json",

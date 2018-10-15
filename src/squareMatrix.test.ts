@@ -15,7 +15,7 @@ describe('squareMatrix test', () => {
             ['*', '*', '*', '*', ' ', ' ', ' '],
             ['*', '*', '*', '*', '*', ' ', ' '],
             ['*', '*', '*', '*', '*', '*', ' '],
-            ['*', '*', '*', '*', '*', '*', '*']
+            ['*', '*', '*', '*', '*', '*', '*'],
         ])
     })
     it('should be 4 degree matrix when given degree = 4 & pattern = rightUpwardRightTriangle', () => {
@@ -24,7 +24,7 @@ describe('squareMatrix test', () => {
             [' ', ' ', ' ', '*'],
             [' ', ' ', '*', '*'],
             [' ', '*', '*', '*'],
-            ['*', '*', '*', '*']
+            ['*', '*', '*', '*'],
         ])
     })
     it('should be 5 degree matrix when given degree = 5 & pattern = pyramidMatrix', () => {
@@ -34,7 +34,7 @@ describe('squareMatrix test', () => {
             [' ', '*', '*', '*', ' '],
             ['*', '*', '*', '*', '*'],
             [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ']
+            [' ', ' ', ' ', ' ', ' '],
         ])
     })
     it('should be 6 degree matrix when given degree = 6 & pattern = leftDownwardRightTriangle', () => {
@@ -45,7 +45,7 @@ describe('squareMatrix test', () => {
             ['*', '*', '*', '*', ' ', ' '],
             ['*', '*', '*', ' ', ' ', ' '],
             ['*', '*', ' ', ' ', ' ', ' '],
-            ['*', ' ', ' ', ' ', ' ', ' ']
+            ['*', ' ', ' ', ' ', ' ', ' '],
         ])
     })
     it('should be 6 degree matrix when given degree = 6 & pattern = rightDownwardRightTriangle', () => {
@@ -56,7 +56,7 @@ describe('squareMatrix test', () => {
             [' ', ' ', '*', '*', '*', '*'],
             [' ', ' ', ' ', '*', '*', '*'],
             [' ', ' ', ' ', ' ', '*', '*'],
-            [' ', ' ', ' ', ' ', ' ', '*']
+            [' ', ' ', ' ', ' ', ' ', '*'],
         ])
     })
     it('should be 7 degree matrix printing `%` when given degree = 7 & pattern = leftUpwardRightTriangle', () => {
@@ -68,7 +68,7 @@ describe('squareMatrix test', () => {
             ['%', '%', '%', '%', ' ', ' ', ' '],
             ['%', '%', '%', '%', '%', ' ', ' '],
             ['%', '%', '%', '%', '%', '%', ' '],
-            ['%', '%', '%', '%', '%', '%', '%']
+            ['%', '%', '%', '%', '%', '%', '%'],
         ])
     })
     it('should be 4 degree matrix printing `@` when given degree = 4 & pattern = rightUpwardRightTriangle', () => {
@@ -77,7 +77,7 @@ describe('squareMatrix test', () => {
             [' ', ' ', ' ', '@'],
             [' ', ' ', '@', '@'],
             [' ', '@', '@', '@'],
-            ['@', '@', '@', '@']
+            ['@', '@', '@', '@'],
         ])
     })
     it('should be 5 degree matrix printing `15` when given degree = 5 & pattern = pyramidMatrix', () => {
@@ -87,7 +87,7 @@ describe('squareMatrix test', () => {
             [' ', 15, 15, 15, ' '],
             [15, 15, 15, 15, 15],
             [' ', ' ', ' ', ' ', ' '],
-            [' ', ' ', ' ', ' ', ' ']
+            [' ', ' ', ' ', ' ', ' '],
         ])
     })
     it('should be 6 degree matrix printing `$` when given degree = 6 & pattern = leftDownwardRightTriangle', () => {
@@ -98,7 +98,7 @@ describe('squareMatrix test', () => {
             ['$', '$', '$', '$', ' ', ' '],
             ['$', '$', '$', ' ', ' ', ' '],
             ['$', '$', ' ', ' ', ' ', ' '],
-            ['$', ' ', ' ', ' ', ' ', ' ']
+            ['$', ' ', ' ', ' ', ' ', ' '],
         ])
     })
     it('should be 6 degree matrix printing `*` when given degree = 6 & pattern is rightDownwardRightTriangle', () => {
@@ -109,7 +109,7 @@ describe('squareMatrix test', () => {
             [' ', ' ', '*', '*', '*', '*'],
             [' ', ' ', ' ', '*', '*', '*'],
             [' ', ' ', ' ', ' ', '*', '*'],
-            [' ', ' ', ' ', ' ', ' ', '*']
+            [' ', ' ', ' ', ' ', ' ', '*'],
         ])
     })
 })
