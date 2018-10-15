@@ -9,6 +9,9 @@
         "lint": "tslint --project .",
         "precommit": "lint-staged"
     },
+    "bin": {
+        "matrix": "./build/cli.js"
+    },
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged"
