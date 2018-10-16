@@ -113,3 +113,61 @@ describe('squareMatrix test', () => {
         ])
     })
 })
+describe('cli test', () => {
+    it('should be 3 degree pyramid matrix printing & when entered matrix -pyramid on cli ', () => {
+        const leftUpwardRightTriangle = new SquareMatrix('()', new LeftUpwardRightTriangle())
+        expect(leftUpwardRightTriangle.executePattern(6).join('\n')).toEqual(
+            '(), , , , , ' +
+                '\n' +
+                '(),(), , , , ' +
+                '\n' +
+                '(),(),(), , , ' +
+                '\n' +
+                '(),(),(),(), , ' +
+                '\n' +
+                '(),(),(),(),(), ' +
+                '\n' +
+                '(),(),(),(),(),()',
+        )
+    })
+    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
+        const rightUpwardRightTriangle = new SquareMatrix('K9', new RightUpwardRightTriangle())
+        expect(rightUpwardRightTriangle.executePattern(5).join('\n')).toEqual(
+            ' , , , ,K9' +
+                '\n' +
+                ' , , ,K9,K9' +
+                '\n' +
+                ' , ,K9,K9,K9' +
+                '\n' +
+                ' ,K9,K9,K9,K9' +
+                '\n' +
+                'K9,K9,K9,K9,K9',
+        )
+    })
+    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
+        const pyramidTriangle = new SquareMatrix('==', new PyramidTriangle())
+        expect(pyramidTriangle.executePattern(3).join('\n')).toEqual(
+            ' ,==, ' + '\n' + '==,==,==' + '\n' + ' , , ',
+        )
+    })
+    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
+        const leftDownwardRightTriangle = new SquareMatrix('&', new LeftDownwardRightTriangle())
+        expect(leftDownwardRightTriangle.executePattern(4).join('\n')).toEqual(
+            '&,&,&,&' + '\n' + '&,&,&, ' + '\n' + '&,&, , ' + '\n' + '&, , , ',
+        )
+    })
+    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
+        const rightDownwardRightTriangle = new SquareMatrix(5, new RightDownwardRightTriangle())
+        expect(rightDownwardRightTriangle.executePattern(5).join('\n')).toEqual(
+            '5,5,5,5,5' +
+                '\n' +
+                ' ,5,5,5,5' +
+                '\n' +
+                ' , ,5,5,5' +
+                '\n' +
+                ' , , ,5,5' +
+                '\n' +
+                ' , , , ,5',
+        )
+    })
+})
