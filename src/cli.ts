@@ -35,7 +35,7 @@ function inputPyramid() {
     function askData(i: number) {
         stdout.write(`${inputData[i]}\n`)
     }
-    stdin.on('data', data => {
+    stdin.on('data', (data) => {
         argv.push(data.replace('\r\n', ''))
         if (argv.length < 6) {
             askData(argv.length - 4)
@@ -59,7 +59,7 @@ function inputLeftUpward() {
     function askData(i: number) {
         stdout.write(`${inputData[i]}\n`)
     }
-    stdin.on('data', data => {
+    stdin.on('data', (data) => {
         argv.push(data.replace('\r\n', ''))
         if (argv.length < 6) {
             askData(argv.length - 4)
@@ -83,7 +83,7 @@ function inputRightUpward() {
     function askData(i: number) {
         stdout.write(`${inputData[i]}\n`)
     }
-    stdin.on('data', data => {
+    stdin.on('data', (data) => {
         argv.push(data.replace('\r\n', ''))
         if (argv.length < 6) {
             askData(argv.length - 4)
@@ -107,7 +107,7 @@ function inputLeftDownward() {
     function askData(i: number) {
         stdout.write(`${inputData[i]}\n`)
     }
-    stdin.on('data', data => {
+    stdin.on('data', (data) => {
         argv.push(data.replace('\r\n', ''))
         if (argv.length < 6) {
             askData(argv.length - 4)
@@ -131,7 +131,7 @@ function inputRightDownward() {
     function askData(i: number) {
         stdout.write(`${inputData[i]}\n`)
     }
-    stdin.on('data', data => {
+    stdin.on('data', (data) => {
         argv.push(data.replace('\r\n', ''))
         if (argv.length < 6) {
             askData(argv.length - 4)
