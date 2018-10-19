@@ -22,7 +22,7 @@ function isContain(thisArgv: string[], keyword: string): boolean {
 
 if (process.argv.length === 2) {
     usage()
-} else if ((isContain(process.argv, '-help') || isContain(process.argv, '-h')) && process.argv[2] === 'matrix') {
+} else if ((isContain(process.argv, '-help') || isContain(process.argv, '-h')) && process.argv.length === 3) {
     usage()
 } else if (process.argv.length === 4) {
     const shapeCharacter = process.argv[2]
