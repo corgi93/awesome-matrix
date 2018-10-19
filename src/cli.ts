@@ -12,8 +12,7 @@ export function usage(): void {
     console.log('Option :')
     console.log(' -h, --help   Display this help message')
     console.log(
-        ' -p, --pattern  (default value is pyramid)' +
-            '(pyramid | leftUpward | rightUpward | leftDownward | rightDownward)',
+        ' -p, -p=pattern (pyramid | -leftUpward | rightUpward | leftDownward | rightDownward)' + ' [default : pyramid]',
     )
 }
 
@@ -23,31 +22,31 @@ function isContain(thisArgv: string[], keyword: string): boolean {
 
 if (process.argv.length === 2) {
     usage()
-} else if ((isContain(process.argv, '-help') || isContain(process.argv, '-h')) && process.argv.length === 3) {
+} else if ((isContain(process.argv, '-help') || isContain(process.argv, '-h')) && process.argv[2] === 'matrix') {
     usage()
 } else if (process.argv.length === 4) {
     const shapeCharacter = process.argv[2]
     const degree = process.argv[3]
+
     const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
     console.log(pyramidTriangle.executePattern(parseInt(degree, 10)).join('\n'))
 } else if (process.argv.length === 5) {
     const shapeCharacter = process.argv[3]
     const degree = process.argv[4]
 
-    if (isContain(process.argv, 'pyramid')) {
+    if (isContain(process.argv, '-p=pyramid')) {
         const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
         console.log(pyramidTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-        console.log(process.argv)
-    } else if (isContain(process.argv, 'leftUpward')) {
+    } else if (isContain(process.argv, '-p=leftUpward')) {
         const leftUpwardRightTriangle = new SquareMatrix(shapeCharacter, new LeftUpwardRightTriangle())
         console.log(leftUpwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, 'rightUpward')) {
+    } else if (isContain(process.argv, '-p=rightUpward')) {
         const rightUpwardRightTriangle = new SquareMatrix(shapeCharacter, new RightUpwardRightTriangle())
         console.log(rightUpwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, 'leftDownward')) {
+    } else if (isContain(process.argv, '-p=leftDownward')) {
         const leftDownwardRightTriangle = new SquareMatrix(shapeCharacter, new LeftDownwardRightTriangle())
         console.log(leftDownwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, 'rightDownward')) {
+    } else if (isContain(process.argv, '-p=rightDownward')) {
         const rightDownwardRightTriangle = new SquareMatrix(shapeCharacter, new RightDownwardRightTriangle())
         console.log(rightDownwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
     } else {
