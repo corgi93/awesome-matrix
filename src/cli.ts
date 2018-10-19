@@ -6,52 +6,175 @@ import { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangl
 import { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
 import { SquareMatrix } from './squareMatrix'
 
+const argv = process.argv
+
 export function usage(): void {
     console.log('TSAwesomeMatrix CLI')
     console.log('Usage: matrix [Option] shapeCharacter degree')
     console.log('Option :')
-    console.log(' -h, --help   Display this help message')
+    console.log('  -help | -h :  Display this help message')
     console.log(
-        ' -p, -p=pattern (pyramid | -leftUpward | rightUpward | leftDownward | rightDownward)' + ' [default : pyramid]',
+        '  -pattern  : -pattern is one of (-pyramid | -leftUpward | -rightUpward | -leftDownward | -rightDownward)' +
+            ' [default : -pyramid]',
     )
 }
 
-function isContain(thisArgv: string[], keyword: string): boolean {
+function isContainKeyword(thisArgv: string[], keyword: string): boolean {
     return thisArgv.lastIndexOf(keyword) !== -1
 }
 
-if (process.argv.length === 2) {
-    usage()
-} else if ((isContain(process.argv, '-help') || isContain(process.argv, '-h')) && process.argv.length === 3) {
-    usage()
-} else if (process.argv.length === 4) {
-    const shapeCharacter = process.argv[2]
-    const degree = process.argv[3]
+function exceptionKeywordDefault() {
+    const shapeCharacter = argv[2]
 
-    const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
-    console.log(pyramidTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-} else if (process.argv.length === 5) {
-    const shapeCharacter = process.argv[3]
-    const degree = process.argv[4]
-
-    if (isContain(process.argv, '-p=pyramid')) {
-        const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
-        console.log(pyramidTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, '-p=leftUpward')) {
-        const leftUpwardRightTriangle = new SquareMatrix(shapeCharacter, new LeftUpwardRightTriangle())
-        console.log(leftUpwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, '-p=rightUpward')) {
-        const rightUpwardRightTriangle = new SquareMatrix(shapeCharacter, new RightUpwardRightTriangle())
-        console.log(rightUpwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, '-p=leftDownward')) {
-        const leftDownwardRightTriangle = new SquareMatrix(shapeCharacter, new LeftDownwardRightTriangle())
-        console.log(leftDownwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else if (isContain(process.argv, '-p=rightDownward')) {
-        const rightDownwardRightTriangle = new SquareMatrix(shapeCharacter, new RightDownwardRightTriangle())
-        console.log(rightDownwardRightTriangle.executePattern(parseInt(degree, 10)).join('\n'))
-    } else {
-        console.log('The pattern you entered is missing. Please check the usage')
-    }
-} else {
-    console.error('You should enter shapeCharacter and degree in order and put in proper type. Please check the usage')
+    return (
+        shapeCharacter === '-h' ||
+        shapeCharacter === '-help' ||
+        shapeCharacter === '-pyramid' ||
+        shapeCharacter === '-rightUpward' ||
+        shapeCharacter === '-leftUpward' ||
+        shapeCharacter === '-rightDownward' ||
+        shapeCharacter === '-leftDownward'
+    )
 }
+
+function exceptionKeywordPatterns() {
+    const shapeCharacter = argv[3]
+
+    return (
+        shapeCharacter === '-h' ||
+        shapeCharacter === '-help' ||
+        shapeCharacter === '-pyramid' ||
+        shapeCharacter === '-rightUpward' ||
+        shapeCharacter === '-leftUpward' ||
+        shapeCharacter === '-rightDownward' ||
+        shapeCharacter === '-leftDownward'
+    )
+}
+
+function patternsPyramid() {
+    const shapeCharacter = argv[3]
+    const degree = argv[4]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordPatterns()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parseInt(degree, 10))) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const pyramid = new SquareMatrix(shapeCharacter, new PyramidTriangle())
+        console.log(pyramid.executePattern(parsingValue).join('\n'))
+    }
+}
+
+function patternsLeftUpward() {
+    const shapeCharacter = argv[3]
+    const degree = argv[4]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordPatterns()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parseInt(degree, 10))) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const leftUpward = new SquareMatrix(shapeCharacter, new LeftUpwardRightTriangle())
+        console.log(leftUpward.executePattern(parsingValue).join('\n'))
+    }
+}
+
+function patternsRightUpward() {
+    const shapeCharacter = argv[3]
+    const degree = argv[4]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordPatterns()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parseInt(degree, 10))) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const rightUpward = new SquareMatrix(shapeCharacter, new RightUpwardRightTriangle())
+        console.log(rightUpward.executePattern(parsingValue).join('\n'))
+    }
+}
+
+function patternsLeftDownward() {
+    const shapeCharacter = argv[3]
+    const degree = argv[4]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordPatterns()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parseInt(degree, 10))) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const leftDownward = new SquareMatrix(shapeCharacter, new LeftDownwardRightTriangle())
+        console.log(leftDownward.executePattern(parsingValue).join('\n'))
+    }
+}
+function patternsRightDownward() {
+    const shapeCharacter = argv[3]
+    const degree = argv[4]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordPatterns()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parseInt(degree, 10))) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const rightDownward = new SquareMatrix(shapeCharacter, new RightDownwardRightTriangle())
+        console.log(rightDownward.executePattern(parsingValue).join('\n'))
+    }
+}
+
+function defaultPattern() {
+    const shapeCharacter = argv[2]
+    const degree = argv[3]
+    const parsingValue = parseInt(degree, 10)
+
+    if (exceptionKeywordDefault()) {
+        console.error('Error: You entered Keyword in place shapeCharacter. please enter other character')
+        process.exit(-1)
+    } else if (isNaN(parsingValue)) {
+        console.error('Error: Enter to number in place degree')
+    } else {
+        const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
+        console.log(pyramidTriangle.executePattern(parsingValue).join('\n'))
+        process.exit(0)
+    }
+}
+
+function patterns() {
+    if (isContainKeyword(argv, '-pyramid')) {
+        patternsPyramid()
+    } else if (isContainKeyword(argv, '-leftUpward')) {
+        patternsLeftUpward()
+    } else if (isContainKeyword(argv, '-rightUpward')) {
+        patternsRightUpward()
+    } else if (isContainKeyword(argv, '-leftDownward')) {
+        patternsLeftDownward()
+    } else if (isContainKeyword(argv, '-rightDownward')) {
+        patternsRightDownward()
+    } else {
+        console.error('The pattern you entered is missing. Please check the usage')
+    }
+}
+
+function cliProcess() {
+    if (argv.length === 2) {
+        usage()
+    } else if (argv.length === 3 && (isContainKeyword(argv, '-help') || isContainKeyword(argv, '-h'))) {
+        usage()
+    } else if (argv.length === 4) {
+        defaultPattern()
+    } else if (argv.length === 5) {
+        patterns()
+    } else {
+        console.error('Enter shapeCharacter and degree in order and put in proper type. Please check the usage')
+        process.exit(-1)
+    }
+}
+cliProcess()
