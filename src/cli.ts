@@ -12,9 +12,9 @@ export function usage(): void {
     console.log('TSAwesomeMatrix CLI')
     console.log('Usage: matrix [Option] shapeCharacter degree')
     console.log('Option :')
-    console.log('  -help | -h :  Display this help message')
+    console.log('  -help , -h :  Display this help message')
     console.log(
-        '  -pattern  : -pattern is one of (-pyramid | -leftUpward | -rightUpward | -leftDownward | -rightDownward)' +
+        '  -p=pattern  : pattern is one of (-pyramid | -leftUpward | -rightUpward | -leftDownward | -rightDownward)' +
             ' [default : -pyramid]',
     )
 }
@@ -96,7 +96,6 @@ function defaultPattern() {
     } else {
         const pyramidTriangle = new SquareMatrix(shapeCharacter, new PyramidTriangle())
         console.log(pyramidTriangle.executePattern(parsingValue).join('\n'))
-        console.log(argv)
         process.exit(0)
     }
 }
