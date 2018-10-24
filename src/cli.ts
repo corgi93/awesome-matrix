@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { LeftDownwardRightTriangle } from './patterns/leftDownwardRightTriangle'
 import { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
 import { PyramidTriangle } from './patterns/pyramidTriangle'
@@ -8,7 +7,7 @@ import { SquareMatrix } from './squareMatrix'
 
 const argv = process.argv
 
-export function usage(): void {
+function usage(): void {
     console.log('AwesomeMatrix CLI')
     console.log('Usage: matrix [Option] shapeCharacter degree')
     console.log('Option :')
@@ -21,15 +20,9 @@ export function usage(): void {
     console.log('-d=input : Matrix Degree(only number)')
 }
 
-class Option {
-    public printUsage(): void {
-        if (argv.length === 2 && argv.indexOf('matrix') === 1) {
-            usage()
-            process.exit(-1)
-        } else if (argv.indexOf('-help') || argv.indexOf('-h') === 2) {
-            usage()
-            process.exit(-1)
-        }
+export class Option {
+    public prettier(arr: string[][]) {
+        return arr.join('\n').replace(/,+/g, '')
     }
 
     public patternsForm(): void {
@@ -39,46 +32,25 @@ class Option {
         const parsingDegree = parseInt(degree.toString(), 10)
         const parsingShape = shape.toString()
 
+        if (isNaN(parsingDegree)) {
+            console.error('Please enter number in -d=degree')
+        }
+
         if (isRightKeyword('-p=pyramid')) {
             const pyramid = new SquareMatrix(parsingShape, new PyramidTriangle())
-            console.log(
-                pyramid
-                    .executePattern(parsingDegree)
-                    .join('\n')
-                    .replace(/,+/g, ''),
-            )
+            console.log(this.prettier(pyramid.executePattern(parsingDegree)))
         } else if (isRightKeyword('-p=rightUpward')) {
             const rightUpward = new SquareMatrix(parsingShape, new RightUpwardRightTriangle())
-            console.log(
-                rightUpward
-                    .executePattern(parsingDegree)
-                    .join('\n')
-                    .replace(/,+/g, ''),
-            )
+            console.log(this.prettier(rightUpward.executePattern(parsingDegree)))
         } else if (isRightKeyword('-p=leftUpward')) {
             const leftUpward = new SquareMatrix(parsingShape, new LeftUpwardRightTriangle())
-            console.log(
-                leftUpward
-                    .executePattern(parsingDegree)
-                    .join('\n')
-                    .replace(/,+/g, ''),
-            )
+            console.log(this.prettier(leftUpward.executePattern(parsingDegree)))
         } else if (isRightKeyword('-p=rightDownward')) {
             const rightDownward = new SquareMatrix(parsingShape, new RightDownwardRightTriangle())
-            console.log(
-                rightDownward
-                    .executePattern(parsingDegree)
-                    .join('\n')
-                    .replace(/,+/g, ''),
-            )
+            console.log(this.prettier(rightDownward.executePattern(parsingDegree)))
         } else if (isRightKeyword('-p=leftDownward')) {
             const leftDownward = new SquareMatrix(parsingShape, new LeftDownwardRightTriangle())
-            console.log(
-                leftDownward
-                    .executePattern(parsingDegree)
-                    .join('\n')
-                    .replace(/,+/g, ''),
-            )
+            console.log(this.prettier(leftDownward.executePattern(parsingDegree)))
         }
     }
 }
@@ -98,11 +70,8 @@ function getValue(search: string, splitChar: string): string[] {
     return values
 }
 
-function cliStart(): void {
-    if (isRightKeyword('-help') || isRightKeyword('-h')) {
-        const callUsage = new Option()
-        callUsage.printUsage()
-    } else if (isRightKeyword('-p=pyramid')) {
+function callPattern() {
+    if (isRightKeyword('-p=pyramid')) {
         const pattern = new Option()
         pattern.patternsForm()
     } else if (isRightKeyword('-p=leftUpward')) {
@@ -117,6 +86,24 @@ function cliStart(): void {
     } else if (isRightKeyword('-p=rightDownward')) {
         const pattern = new Option()
         pattern.patternsForm()
+    } else {
+        console.error('Please check the keyword')
+    }
+}
+
+function cliStart(): void {
+    if (argv.length === 2) {
+        usage()
+        process.exit(-1)
+    } else if (isRightKeyword('-help') || isRightKeyword('-h')) {
+        usage()
+        process.exit(-1)
+    } else if (getValue('-p=', '=')) {
+        callPattern()
+        process.exit(-1)
+    } else {
+        console.error('Please check the keyword!')
+        process.exit(-1)
     }
 }
 

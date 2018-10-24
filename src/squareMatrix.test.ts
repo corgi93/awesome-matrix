@@ -144,30 +144,49 @@ describe('cli test', () => {
                 'K9,K9,K9,K9,K9',
         )
     })
-    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
-        const pyramidTriangle = new SquareMatrix('==', new PyramidTriangle())
-        expect(pyramidTriangle.executePattern(3).join('\n')).toEqual(
-            ' ,==, ' + '\n' + '==,==,==' + '\n' + ' , , ',
-        )
+    it('should be 5 degree pyramid matrix printing @ when entered matrix -p=pyramid on cli ', () => {
+        const pyramid = new SquareMatrix('@', new PyramidTriangle())
+        expect(
+            pyramid
+                .executePattern(3)
+                .join('\n')
+                .replace(/,+/g, ''),
+        ).toEqual(' @ ' + '\n' + '@@@' + '\n' + '   ')
     })
-    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
-        const leftDownwardRightTriangle = new SquareMatrix('&', new LeftDownwardRightTriangle())
-        expect(leftDownwardRightTriangle.executePattern(4).join('\n')).toEqual(
-            '&,&,&,&' + '\n' + '&,&,&, ' + '\n' + '&,&, , ' + '\n' + '&, , , ',
-        )
+    it('should be 5 degree pyramid matrix printing & when entered matrix -p=leftDownward on cli ', () => {
+        const pyramid = new SquareMatrix('&', new LeftDownwardRightTriangle())
+        expect(
+            pyramid
+                .executePattern(4)
+                .join('\n')
+                .replace(/,+/g, ''),
+        ).toEqual('&&&&' + '\n' + '&&& ' + '\n' + '&&  ' + '\n' + '&   ')
     })
-    it('should be 5 degree pyramid matrix printing K9 when entered matrix -pyramid on cli ', () => {
-        const rightDownwardRightTriangle = new SquareMatrix(5, new RightDownwardRightTriangle())
-        expect(rightDownwardRightTriangle.executePattern(5).join('\n')).toEqual(
-            '5,5,5,5,5' +
-                '\n' +
-                ' ,5,5,5,5' +
-                '\n' +
-                ' , ,5,5,5' +
-                '\n' +
-                ' , , ,5,5' +
-                '\n' +
-                ' , , , ,5',
-        )
+    it('should be 5 degree pyramid matrix printing 5 when entered matrix -p=rightDownward on cli ', () => {
+        const pyramid = new SquareMatrix('5', new RightDownwardRightTriangle())
+        expect(
+            pyramid
+                .executePattern(5)
+                .join('\n')
+                .replace(/,+/g, ''),
+        ).toEqual('55555' + '\n' + ' 5555' + '\n' + '  555' + '\n' + '   55' + '\n' + '    5')
+    })
+    it('should be 5 degree pyramid matrix printing # when entered matrix -p=leftUpward on cli ', () => {
+        const pyramid = new SquareMatrix('#', new LeftUpwardRightTriangle())
+        expect(
+            pyramid
+                .executePattern(6)
+                .join('\n')
+                .replace(/,+/g, ''),
+        ).toEqual('#     ' + '\n' + '##    ' + '\n' + '###   ' + '\n' + '####  ' + '\n' + '##### ' + '\n' + '######')
+    })
+    it('should be 5 degree pyramid matrix printing T when entered matrix -p=leftUpward on cli ', () => {
+        const pyramid = new SquareMatrix('T', new RightUpwardRightTriangle())
+        expect(
+            pyramid
+                .executePattern(4)
+                .join('\n')
+                .replace(/,+/g, ''),
+        ).toEqual('   T' + '\n' + '  TT' + '\n' + ' TTT' + '\n' + 'TTTT')
     })
 })
