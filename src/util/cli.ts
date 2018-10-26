@@ -24,10 +24,6 @@ export class Argument {
         this.args = argv
     }
 
-    public get length() {
-        return this.args.length
-    }
-
     public isContained(keyword: string): boolean {
         return this.args.indexOf(keyword) !== -1
     }
@@ -42,6 +38,7 @@ export class Argument {
         }
         return values
     }
+
     public isContainPartial(keyword: string): boolean {
         const values = []
         for (const key in this.args) {
@@ -50,6 +47,14 @@ export class Argument {
             }
         }
         return values.indexOf(keyword) !== -1
+    }
+
+    public isEmpty(): boolean {
+        return this.args.length === 2
+    }
+
+    public isNotEmpty(): boolean {
+        return this.args.length > 2
     }
 }
 
@@ -102,20 +107,19 @@ export function prettier(inputValue: string[][] | string) {
     }
 }
 
-function cliStart(): void {
+// noinspection JSUnusedGlobalSymbols
+export function cliStart(): void {
     const arg = new Argument(process.argv)
-    if (arg.length === 2) {
+
+    if (arg.isEmpty()) {
         const pyramid = new SquareMatrix('*', new PyramidTriangle())
         console.log(prettier(pyramid.executePattern(5)))
     } else if (arg.isContained('-help') || arg.isContained('-h')) {
         usage()
         process.exit(-1)
-    } else if (arg.length > 2) {
+    } else if (arg.isNotEmpty()) {
         console.log(prettier(optionPattern()))
     } else {
         console.error('Please check the keyword!')
-        process.exit(-1)
     }
 }
-
-cliStart()
