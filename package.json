@@ -10,7 +10,7 @@
         "precommit": "lint-staged"
     },
     "bin": {
-        "matrix": "./build/cli.js"
+        "matrix": "./bin/matrix"
     },
     "husky": {
         "hooks": {
@@ -37,7 +37,7 @@
     },
     "author": "",
     "license": "ISC",
-    "description": "",
+    "description": "This is a simple two-dimensional matrix library written by [TypeScript](https://www.typescriptlang.org/docs/home.html) that receives input from the user.",
     "dependencies": {},
     "devDependencies": {
         "@types/jest": "^23.3.2",
@@ -50,5 +50,9 @@
         "ts-node": "^7.0.1",
         "tslint": "^5.11.0",
         "typescript": "^3.1.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://intra.novonetworks.com:8073/jaden/typescript-lesson.git"
     }
 }
