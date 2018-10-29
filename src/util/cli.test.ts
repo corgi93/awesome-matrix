@@ -30,11 +30,6 @@ describe('cli test', () => {
         const word = new Argument(testArray)
         expect(word.isEmpty()).toEqual(true)
     })
-    it('should be true when contain matrix', () => {
-        const testArray: string[] = ['node', '../matrix', '-p=pyramid']
-        const word = new Argument(testArray)
-        expect(word.isNotEmpty()).toEqual(true)
-    })
     it('should be matrix satisfying the conditions when default conditions', () => {
         const test = new Argument(process.argv)
         expect(optionPattern(test)).toEqual([
@@ -60,5 +55,36 @@ describe('cli test', () => {
             ['@', '@', ' ', ' '],
             ['@', ' ', ' ', ' '],
         ])
+    })
+    it('should be error message when input value is `-s=`', () => {
+        const argv = ['matrix', '-s=']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('please fill the shape value')
+    })
+    it('should be error message when input value is `-s` ', () => {
+        const argv = ['matrix', '-s']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('check the shape')
+    })
+    it('should be error message when input value is `-d=` ', () => {
+        const argv = ['matrix', '-d=']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('please fill the degree value')
+    })
+    it('should be error message when degree value is not number', () => {
+        const argv = ['matrix', '-d=@']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('degree must be a number')
+    })
+
+    it('should be error message when input value is `-p` ', () => {
+        const argv = ['matrix', '-p']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('please check the pattern')
+    })
+    it('should be error message when input value is `-p=` ', () => {
+        const argv = ['matrix', '-p=']
+        const test = new Argument(argv)
+        expect(optionPattern(test)).toEqual('please fill the pattern value')
     })
 })

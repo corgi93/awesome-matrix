@@ -50,10 +50,6 @@ export class Argument {
     public isEmpty(): boolean {
         return this.args.length === 2
     }
-
-    public isNotEmpty(): boolean {
-        return this.args.length > 2
-    }
 }
 
 export function optionPattern(arg: Argument): string[][] | string {
@@ -73,7 +69,9 @@ export function optionPattern(arg: Argument): string[][] | string {
     if (arg.isContainPartial('-d=')) {
         const strDegree = arg.getValue('-d=', '=').toString()
         degree = parseInt(strDegree, 10)
-        if (isNaN(degree)) {
+        if (arg.isContained('-d=')) {
+            return 'please fill the degree value'
+        } else if (isNaN(degree)) {
             return 'degree must be a number'
         }
     } else if (!arg.isContained('-d')) {
@@ -101,7 +99,7 @@ export function optionPattern(arg: Argument): string[][] | string {
         const pyramid = new SquareMatrix(shape, new PyramidTriangle())
         return pyramid.executePattern(degree)
     } else {
-        return 'check the pattern'
+        return 'please check the pattern'
     }
 }
 
@@ -123,7 +121,7 @@ export function cliStart(): void {
     } else if (arg.isContained('-help') || arg.isContained('-h')) {
         usage()
         process.exit(-1)
-    } else if (arg.isNotEmpty()) {
+    } else if (!arg.isEmpty()) {
         console.log(prettier(optionPattern(arg)))
     }
 }
