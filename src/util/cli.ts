@@ -121,7 +121,7 @@ export function cliStart(): void {
     } else if (arg.isContained('-help') || arg.isContained('-h')) {
         usage()
         process.exit(-1)
-    } else if (!arg.isEmpty()) {
+    } else {
         console.log(prettier(optionPattern(arg)))
     }
 }
