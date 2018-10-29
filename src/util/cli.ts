@@ -58,25 +58,33 @@ export class Argument {
     }
 }
 
-export function optionPattern(): string[][] | string {
-    const arg = new Argument(process.argv)
+export function optionPattern(arg: Argument): string[][] | string {
     let degree: number = 5
     let shape = ' '
 
-    if (arg.isContainPartial('-s=')) {
+    if (arg.isContained('-s=')) {
+        return 'please fill the shape value'
+    } else if (arg.isContainPartial('-s=')) {
         shape = arg.getValue('-s=', '=').toString()
     } else if (!arg.isContained('-s')) {
         shape = '*'
+    } else {
+        return 'check the shape'
     }
 
     if (arg.isContainPartial('-d=')) {
         const strDegree = arg.getValue('-d=', '=').toString()
         degree = parseInt(strDegree, 10)
+        if (isNaN(degree)) {
+            return 'degree must be a number'
+        }
     } else if (!arg.isContained('-d')) {
         degree = 5
     }
 
-    if (arg.isContained('-p=pyramid')) {
+    if (arg.isContained('-p=')) {
+        return 'please fill the pattern value'
+    } else if (arg.isContained('-p=pyramid')) {
         const pyramid = new SquareMatrix(shape, new PyramidTriangle())
         return pyramid.executePattern(degree)
     } else if (arg.isContained('-p=rightUpward')) {
@@ -118,8 +126,6 @@ export function cliStart(): void {
         usage()
         process.exit(-1)
     } else if (arg.isNotEmpty()) {
-        console.log(prettier(optionPattern()))
-    } else {
-        console.error('Please check the keyword!')
+        console.log(prettier(optionPattern(arg)))
     }
 }

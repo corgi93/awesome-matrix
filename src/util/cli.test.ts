@@ -35,20 +35,30 @@ describe('cli test', () => {
         const word = new Argument(testArray)
         expect(word.isNotEmpty()).toEqual(true)
     })
-    it('should be matrix satisfying the conditions when -p=leftUpward -s=# -d=5', () => {
-        process.argv = ['-s=#', '-p=leftUpward', '-d=5']
-        expect(prettier(optionPattern())).toEqual(
-            '#    ' + '\n' + '##   ' + '\n' + '###  ' + '\n' + '#### ' + '\n' + '#####',
-        )
+    it('should be matrix satisfying the conditions when default conditions', () => {
+        const arg = new Argument(process.argv)
+        expect(optionPattern(arg)).toEqual([
+            [' ', ' ', '*', ' ', ' '],
+            [' ', '*', '*', '*', ' '],
+            ['*', '*', '*', '*', '*'],
+            [' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' '],
+        ])
     })
     it('should be matrix satisfying the conditions when -d=3 and others are default', () => {
-        process.argv = ['-d=3']
-        expect(prettier(optionPattern())).toEqual(' * ' + '\n' + '***' + '\n' + '   ')
+        process.argv = ['matrix', '-d=3']
+        const test = new Argument(process.argv)
+        test.isContained('-d=3')
+        expect(optionPattern(test)).toEqual([[' ', '*', ' '], ['*', '*', '*'], [' ', ' ', ' ']])
     })
     it('should be matrix satisfying the conditions when -p=rightDownward -s=@ and degree is default', () => {
-        process.argv = ['-s=@', '-p=leftDownward']
-        expect(prettier(optionPattern())).toEqual(
-            '@@@@@' + '\n' + '@@@@ ' + '\n' + '@@@  ' + '\n' + '@@   ' + '\n' + '@    ',
-        )
+        process.argv = ['matrix', '-d=4', '-s=@', '-p=leftDownward']
+        const test = new Argument(process.argv)
+        expect(optionPattern(test)).toEqual([
+            ['@', '@', '@', '@'],
+            ['@', '@', '@', ' '],
+            ['@', '@', ' ', ' '],
+            ['@', ' ', ' ', ' '],
+        ])
     })
 })
