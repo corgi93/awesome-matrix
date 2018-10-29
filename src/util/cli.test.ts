@@ -36,8 +36,8 @@ describe('cli test', () => {
         expect(word.isNotEmpty()).toEqual(true)
     })
     it('should be matrix satisfying the conditions when default conditions', () => {
-        const arg = new Argument(process.argv)
-        expect(optionPattern(arg)).toEqual([
+        const test = new Argument(process.argv)
+        expect(optionPattern(test)).toEqual([
             [' ', ' ', '*', ' ', ' '],
             [' ', '*', '*', '*', ' '],
             ['*', '*', '*', '*', '*'],
@@ -46,14 +46,14 @@ describe('cli test', () => {
         ])
     })
     it('should be matrix satisfying the conditions when -d=3 and others are default', () => {
-        process.argv = ['matrix', '-d=3']
-        const test = new Argument(process.argv)
+        const argv = ['matrix', '-d=3']
+        const test = new Argument(argv)
         test.isContained('-d=3')
         expect(optionPattern(test)).toEqual([[' ', '*', ' '], ['*', '*', '*'], [' ', ' ', ' ']])
     })
-    it('should be matrix satisfying the conditions when -p=rightDownward -s=@ and degree is default', () => {
-        process.argv = ['matrix', '-d=4', '-s=@', '-p=leftDownward']
-        const test = new Argument(process.argv)
+    it('should be matrix satisfying the conditions when -p=rightDownward -s=@ and -d=4', () => {
+        const argv = ['matrix', '-d=4', '-s=@', '-p=leftDownward']
+        const test = new Argument(argv)
         expect(optionPattern(test)).toEqual([
             ['@', '@', '@', '@'],
             ['@', '@', '@', ' '],
