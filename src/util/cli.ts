@@ -7,14 +7,12 @@ import { SquareMatrix } from '../squareMatrix'
 
 function usage(): void {
     console.log('AwesomeMatrix CLI')
-    console.log('Usage: matrix [Option] ')
+    console.log('Usage: matrix [Option]')
     console.log('Option :')
     console.log('  -help , -h :  Display this help message')
-    console.log(
-        '  -p=pattern -s=character -d=number : pattern is one of ' +
-            ' (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)' +
-            ' [default -p: pyramid] [default -s: *] [default degree : 5]',
-    )
+    console.log('  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)')
+    console.log('  -s=character : Users can choose the shape character [default -s=*]')
+    console.log('  -d=number : Users can set the order of array [default -d=5]')
 }
 
 export class Argument {
