@@ -22,10 +22,6 @@ export class Argument {
         this.args = argv
     }
 
-    public isContained(keyword: string): boolean {
-        return this.args.indexOf(keyword) !== -1
-    }
-
     public getValue(search: string, splitChar: string): string[] {
         const values = []
 
@@ -35,6 +31,10 @@ export class Argument {
             }
         }
         return values
+    }
+
+    public isContained(keyword: string): boolean {
+        return this.args.indexOf(keyword) !== -1
     }
 
     public isContainPartial(keyword: string): boolean {
@@ -60,6 +60,10 @@ export function optionPattern(arg: Argument): string[][] | string {
         return 'please fill the shape value'
     } else if (arg.isContainPartial('-s=')) {
         shape = arg.getValue('-s=', '=').toString()
+        if (shape.length > 1) {
+            console.error('please enter one character')
+            process.exit(-1)
+        }
     } else if (!arg.isContained('-s')) {
         shape = '*'
     } else {
@@ -69,7 +73,9 @@ export function optionPattern(arg: Argument): string[][] | string {
     if (arg.isContainPartial('-d=')) {
         const strDegree = arg.getValue('-d=', '=').toString()
         degree = parseInt(strDegree, 10)
-        if (arg.isContained('-d=')) {
+        if (degree <= 0) {
+            console.error('degree must be a positive number and more than 0')
+        } else if (arg.isContained('-d=')) {
             return 'please fill the degree value'
         } else if (isNaN(degree)) {
             return 'degree must be a number'
@@ -78,9 +84,7 @@ export function optionPattern(arg: Argument): string[][] | string {
         degree = 5
     }
 
-    if (arg.isContained('-p=')) {
-        return 'please fill the pattern value'
-    } else if (arg.isContained('-p=pyramid')) {
+    if (arg.isContained('-p=pyramid')) {
         const pyramid = new SquareMatrix(shape, new PyramidTriangle())
         return pyramid.executePattern(degree)
     } else if (arg.isContained('-p=rightUpward')) {
@@ -95,11 +99,13 @@ export function optionPattern(arg: Argument): string[][] | string {
     } else if (arg.isContained('-p=leftDownward')) {
         const leftDownward = new SquareMatrix(shape, new LeftDownwardRightTriangle())
         return leftDownward.executePattern(degree)
+    } else if (arg.isContainPartial('-p=')) {
+        return 'please check the pattern value'
     } else if (!arg.isContained('-p')) {
         const pyramid = new SquareMatrix(shape, new PyramidTriangle())
         return pyramid.executePattern(degree)
     } else {
-        return 'please check the pattern'
+        return 'check the pattern'
     }
 }
 

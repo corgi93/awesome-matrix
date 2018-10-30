@@ -1,16 +1,20 @@
 import { Argument, optionPattern, prettier } from './cli'
 
-describe('cli test', () => {
+describe('getValue(search , splitChar) function', () => {
     it('should be [] when given search : -p=pyramid and split : = ', () => {
         const testArray: string[] = ['a', 'b', 'c']
         const val = new Argument(testArray)
         expect(val.getValue('-p=pyramid', '=')).toEqual([])
     })
+})
+describe('isContained(keyword) function', () => {
     it('should be true when argv contain keyword in this params ', () => {
         const testArray: string[] = ['this', 'is', 'test']
         const word = new Argument(testArray)
         expect(word.isContained('this')).toEqual(true)
     })
+})
+describe('prettier(arr) function', () => {
     it('should be clean array when use prettier()', () => {
         const testArray: string[][] = [
             [' ', ' ', ' ', 'T'],
@@ -20,16 +24,22 @@ describe('cli test', () => {
         ]
         expect(prettier(testArray)).toEqual('   T' + '\n' + '  TT' + '\n' + ' TTT' + '\n' + 'TTTT')
     })
+})
+describe('isContainPartial(keyword) function', () => {
     it('should be true when contain partial string', () => {
         const testArray: string[] = ['-s=$', 'test', 'array']
         const word = new Argument(testArray)
         expect(word.isContainPartial('-s=')).toEqual(true)
     })
+})
+describe('isEmpty() function', () => {
     it('should be true when arguments is empty', () => {
         const testArray: string[] = ['node', '../matrix']
         const word = new Argument(testArray)
         expect(word.isEmpty()).toEqual(true)
     })
+})
+describe('optionPattern(arg) function', () => {
     it('should be matrix satisfying the conditions when default conditions', () => {
         const test = new Argument(process.argv)
         expect(optionPattern(test)).toEqual([
@@ -56,35 +66,34 @@ describe('cli test', () => {
             ['@', ' ', ' ', ' '],
         ])
     })
-    it('should be error message when input value is `-s=`', () => {
+    it('should be print error message when input value is `-s=`', () => {
         const argv = ['matrix', '-s=']
         const test = new Argument(argv)
         expect(optionPattern(test)).toEqual('please fill the shape value')
     })
-    it('should be error message when input value is `-s` ', () => {
+    it('should be print error message when input value is `-s` ', () => {
         const argv = ['matrix', '-s']
         const test = new Argument(argv)
         expect(optionPattern(test)).toEqual('check the shape')
     })
-    it('should be error message when input value is `-d=` ', () => {
+    it('should be print error message when input value is `-d=` ', () => {
         const argv = ['matrix', '-d=']
         const test = new Argument(argv)
         expect(optionPattern(test)).toEqual('please fill the degree value')
     })
-    it('should be error message when degree value is not number', () => {
+    it('should be print error message when degree value is not number', () => {
         const argv = ['matrix', '-d=@']
         const test = new Argument(argv)
         expect(optionPattern(test)).toEqual('degree must be a number')
     })
-
-    it('should be error message when input value is `-p` ', () => {
+    it('should be print error message when input value is `-p` ', () => {
         const argv = ['matrix', '-p']
         const test = new Argument(argv)
-        expect(optionPattern(test)).toEqual('please check the pattern')
+        expect(optionPattern(test)).toEqual('check the pattern')
     })
-    it('should be error message when input value is `-p=` ', () => {
+    it('should be print error message when input value is `-p=` ', () => {
         const argv = ['matrix', '-p=']
         const test = new Argument(argv)
-        expect(optionPattern(test)).toEqual('please fill the pattern value')
+        expect(optionPattern(test)).toEqual('please check the pattern value')
     })
 })

@@ -90,6 +90,10 @@ describe('squareMatrix test', () => {
             [' ', ' ', ' ', ' ', ' '],
         ])
     })
+    test('throws on odd number', () => {
+        const pyramid = new PyramidTriangle()
+        expect(() => pyramid.twoDimensionArrayLogic(4, '*')).toThrow()
+    })
     it('should be 6 degree matrix printing `$` when given degree = 6 & pattern = leftDownwardRightTriangle', () => {
         const leftDownwardRightTriangle = new SquareMatrix('$', new LeftDownwardRightTriangle())
         expect(leftDownwardRightTriangle.executePattern(6)).toEqual([
