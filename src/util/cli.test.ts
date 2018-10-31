@@ -7,6 +7,7 @@ describe('getValue(search , splitChar) function', () => {
         expect(val.getValue('-p=pyramid', '=')).toEqual([])
     })
 })
+
 describe('isContained(keyword) function', () => {
     it('should be true when argv contain keyword in this params ', () => {
         const testArray: string[] = ['this', 'is', 'test']
@@ -14,6 +15,7 @@ describe('isContained(keyword) function', () => {
         expect(word.isContained('this')).toEqual(true)
     })
 })
+
 describe('prettier(arr) function', () => {
     it('should be clean array when use prettier()', () => {
         const testArray: string[][] = [
@@ -22,9 +24,12 @@ describe('prettier(arr) function', () => {
             [' ', 'T', 'T', 'T'],
             ['T', 'T', 'T', 'T'],
         ]
-        expect(prettier(testArray)).toEqual('   T' + '\n' + '  TT' + '\n' + ' TTT' + '\n' + 'TTTT')
+        expect(prettier(testArray)).toEqual(
+            '   T' + '\n' + '  TT' + '\n' + ' TTT' + '\n' + 'TTTT',
+        )
     })
 })
+
 describe('isContainPartial(keyword) function', () => {
     it('should be true when contain partial string', () => {
         const testArray: string[] = ['-s=$', 'test', 'array']
@@ -32,13 +37,47 @@ describe('isContainPartial(keyword) function', () => {
         expect(word.isContainPartial('-s=')).toEqual(true)
     })
 })
+
 describe('isEmpty() function', () => {
     it('should be true when arguments is empty', () => {
-        const testArray: string[] = ['node', '../matrix']
+        const testArray: string[] = ['node', 'matrix']
         const word = new Argument(testArray)
         expect(word.isEmpty()).toEqual(true)
     })
 })
+
+describe('extractOption(keyword) function', () => {
+    it('should be Extract option when entered keyword', () => {
+        const testArray: string[] = ['-s=#']
+        const word = new Argument(testArray)
+        expect(word.extractOption('-s=')).toEqual('-s=')
+    })
+})
+
+describe('isOneKeyword() function', () => {
+    it('should be true when contains only one value in the array', () => {
+        const testArray: string[] = ['node', 'matrix', '-k=#']
+        const word = new Argument(testArray)
+        expect(word.isOneKeyword()).toEqual(true)
+    })
+})
+
+describe('isTwoKeyword() function', () => {
+    it('should be true when contains only two values in the array', () => {
+        const testArray: string[] = ['node', 'matrix', '-k=#', '-e=3']
+        const word = new Argument(testArray)
+        expect(word.isTwoKeyword()).toEqual(true)
+    })
+})
+
+describe('isMaxKeyword() function', () => {
+    it('should be true when contains only one value in the array', () => {
+        const testArray: string[] = ['node', 'matrix', '-k=#', '-e=3', '-d=7']
+        const word = new Argument(testArray)
+        expect(word.isMaxKeyword()).toEqual(true)
+    })
+})
+
 describe('optionPattern(arg) function', () => {
     it('should be matrix satisfying the conditions when default conditions', () => {
         const test = new Argument(process.argv)
@@ -54,7 +93,11 @@ describe('optionPattern(arg) function', () => {
         const argv = ['matrix', '-d=3']
         const test = new Argument(argv)
         test.isContained('-d=3')
-        expect(optionPattern(test)).toEqual([[' ', '*', ' '], ['*', '*', '*'], [' ', ' ', ' ']])
+        expect(optionPattern(test)).toEqual([
+            [' ', '*', ' '],
+            ['*', '*', '*'],
+            [' ', ' ', ' '],
+        ])
     })
     it('should be matrix satisfying the conditions when -p=rightDownward -s=@ and -d=4', () => {
         const argv = ['matrix', '-d=4', '-s=@', '-p=leftDownward']
