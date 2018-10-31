@@ -10,7 +10,9 @@ function usage(): void {
     console.log('Usage: matrix [Option]')
     console.log('Option :')
     console.log('  -help , -h :  Display this help message')
-    console.log('  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)')
+    console.log(
+        '  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)',
+    )
     console.log('  -s=character : Users can choose the shape character [default -s=*]')
     console.log('  -d=number : Users can set the order of array [default -d=5]')
 }
@@ -39,6 +41,7 @@ export class Argument {
 
     public isContainPartial(keyword: string): boolean {
         const values = []
+
         for (const key in this.args) {
             if (this.args[key].indexOf(keyword) === 0) {
                 values.push(this.args[key].slice(0, 3))
@@ -47,8 +50,30 @@ export class Argument {
         return values.indexOf(keyword) !== -1
     }
 
+    public extractOption(keyword: string): string {
+        const values = []
+        for (const key in this.args) {
+            if (this.args[key].indexOf(keyword) === 0) {
+                values.push(this.args[key].slice(0, 3))
+            }
+        }
+        return values.toString()
+    }
+
     public isEmpty(): boolean {
         return this.args.length === 2
+    }
+
+    public isOneKeyword(): boolean {
+        return this.args.length === 3
+    }
+
+    public isTwoKeyword(): boolean {
+        return this.args.length === 4
+    }
+
+    public isMaxKeyword(): boolean {
+        return this.args.length === 5
     }
 }
 
@@ -61,8 +86,7 @@ export function optionPattern(arg: Argument): string[][] | string {
     } else if (arg.isContainPartial('-s=')) {
         shape = arg.getValue('-s=', '=').toString()
         if (shape.length > 1) {
-            console.error('please enter one character')
-            process.exit(-1)
+            return 'please enter one character'
         }
     } else if (!arg.isContained('-s')) {
         shape = '*'
@@ -73,8 +97,8 @@ export function optionPattern(arg: Argument): string[][] | string {
     if (arg.isContainPartial('-d=')) {
         const strDegree = arg.getValue('-d=', '=').toString()
         degree = parseInt(strDegree, 10)
-        if (degree <= 0) {
-            console.error('degree must be a positive number and more than 0')
+        if (degree <= 0 || degree > 30) {
+            return 'degree is positive number and range is (0<degree<30)'
         } else if (arg.isContained('-d=')) {
             return 'please fill the degree value'
         } else if (isNaN(degree)) {
@@ -85,8 +109,12 @@ export function optionPattern(arg: Argument): string[][] | string {
     }
 
     if (arg.isContained('-p=pyramid')) {
-        const pyramid = new SquareMatrix(shape, new PyramidTriangle())
-        return pyramid.executePattern(degree)
+        if (degree % 2 === 0) {
+            return 'please enter odd number when pyramid pattern'
+        } else {
+            const pyramid = new SquareMatrix(shape, new PyramidTriangle())
+            return pyramid.executePattern(degree)
+        }
     } else if (arg.isContained('-p=rightUpward')) {
         const rightUpward = new SquareMatrix(shape, new RightUpwardRightTriangle())
         return rightUpward.executePattern(degree)
@@ -102,8 +130,12 @@ export function optionPattern(arg: Argument): string[][] | string {
     } else if (arg.isContainPartial('-p=')) {
         return 'please check the pattern value'
     } else if (!arg.isContained('-p')) {
-        const pyramid = new SquareMatrix(shape, new PyramidTriangle())
-        return pyramid.executePattern(degree)
+        if (degree % 2 === 0) {
+            return 'please enter odd number when pyramid pattern'
+        } else {
+            const pyramid = new SquareMatrix(shape, new PyramidTriangle())
+            return pyramid.executePattern(degree)
+        }
     } else {
         return 'check the pattern'
     }
@@ -124,10 +156,45 @@ export function cliStart(): void {
     if (arg.isEmpty()) {
         const pyramid = new SquareMatrix('*', new PyramidTriangle())
         console.log(prettier(pyramid.executePattern(5)))
+        process.exit(-1)
     } else if (arg.isContained('-help') || arg.isContained('-h')) {
         usage()
         process.exit(-1)
+    } else if (arg.isOneKeyword()) {
+        if (arg.extractOption('-s=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else if (arg.extractOption('-d=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else if (arg.extractOption('-p=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else {
+            console.log('Entered wrong keyword!')
+            process.exit(-1)
+        }
+    } else if (arg.isTwoKeyword()) {
+        if (arg.extractOption('-s=') && arg.extractOption('-d=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else if (arg.extractOption('-s=') && arg.extractOption('-p=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else if (arg.extractOption('-d=') && arg.extractOption('-p=')) {
+            console.log(prettier(optionPattern(arg)))
+        } else {
+            console.log('Entered wrong keyword!')
+            process.exit(-1)
+        }
+    } else if (arg.isMaxKeyword()) {
+        if (
+            arg.extractOption('-p=') &&
+            arg.extractOption('-d=') &&
+            arg.extractOption('-s=')
+        ) {
+            console.log(prettier(optionPattern(arg)))
+        } else {
+            console.error('Entered wrong keyword!')
+            process.exit(-1)
+        }
     } else {
-        console.log(prettier(optionPattern(arg)))
+        console.error('Entered wrong keyword!')
+        process.exit(-1)
     }
 }
