@@ -1,200 +1,98 @@
-import { LeftDownwardRightTriangle } from '../patterns/leftDownwardRightTriangle'
-import { LeftUpwardRightTriangle } from '../patterns/leftUpwardRightTriangle'
-import { PyramidTriangle } from '../patterns/pyramidTriangle'
-import { RightDownwardRightTriangle } from '../patterns/rightDownwardRightTriangle'
-import { RightUpwardRightTriangle } from '../patterns/rightUpwardRightTriangle'
-import { SquareMatrix } from '../squareMatrix'
-
 function usage(): void {
     console.log('AwesomeMatrix CLI')
     console.log('Usage: matrix [Option]')
     console.log('Option :')
     console.log('  -help , -h :  Display this help message')
-    console.log(
-        '  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)',
-    )
-    console.log('  -s=character : Users can choose the shape character [default -s=*]')
-    console.log('  -d=number : Users can set the order of array [default -d=5]')
+    console.log('  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)')
+    console.log('  -s=character : Users can choose the shape character (defaultValue -s=*)')
+    console.log('  -d=degree : Users can set the order of array (defaultValue -d=5)')
 }
+
+interface IOption {
+    name: string
+    short: string
+    type?: 'number' | 'string' | 'string[]'
+    value?: any
+    validation?: (value: any) => IValidation
+}
+
+interface IValidation {
+    isValue?: boolean
+    errorMessage?: string
+}
+
+// export function parsingValue(options: IOption[]) {
+//     for (let opt in options) {
+//         const valType = typeof options[opt].type
+//
+//         if (valType === 'string' && options[opt].type === typeof 'string') {
+//
+//         } else if (valType === 'number' && options[opt].type === typeof 'number') {
+//
+//         } else {
+//             return options[opt].value
+//         }
+//     }
+// }
+
+export const options: IOption[] = [
+    { name: 'help', short: '-h', value: usage() },
+    {
+        name: 'pattern',
+        short: '-p=',
+        type: 'string[]',
+        value: 'pyramid' || 'rightUpward' || 'leftUpward' || 'rightDownward' || 'leftDownward'
+    },
+    {
+        name: 'degree',
+        short: '-d=',
+        type: 'number',
+        validation: (dValue: number) => {
+            if (isNaN(dValue)) {
+                return {
+                    errorMessage: 'degree must be a number',
+                    isValue: false
+                }
+            } else if (dValue < 0 || dValue > 30) {
+                return {
+                    errorMessage: 'degree range is more than 0 and less than 30'
+                }
+            } else {
+                return { isValue: true }
+            }
+        },
+        value: 5
+    },
+    {
+        name: 'shape',
+        short: '-s=',
+        type: 'string',
+        validation: (sValue: string) => {
+            if (sValue.length > 1) {
+                return { errorMessage: 'shape size is one' }
+            } else if (sValue === '') {
+                return { errorMessage: 'fill the shape type' }
+            } else {
+                return { isValue: true }
+            }
+        },
+        value: '@'
+    }
+]
 
 export class Argument {
-    private readonly args: string[]
+    public readonly args: string[]
+    public readonly options: IOption[]
 
-    constructor(argv: string[]) {
-        this.args = argv
-    }
-
-    public getValue(search: string, splitChar: string): string[] {
-        const values = []
-
-        for (const key in this.args) {
-            if (this.args[key].indexOf(search) === 0) {
-                values.push(this.args[key].split(splitChar)[1])
-            }
-        }
-        return values
-    }
-
-    public isContained(keyword: string): boolean {
-        return this.args.indexOf(keyword) !== -1
-    }
-
-    public isContainPartial(keyword: string): boolean {
-        const values = []
-
-        for (const key in this.args) {
-            if (this.args[key].indexOf(keyword) === 0) {
-                values.push(this.args[key].slice(0, 3))
-            }
-        }
-        return values.indexOf(keyword) !== -1
-    }
-
-    public extractOption(keyword: string): string {
-        const values = []
-        for (const key in this.args) {
-            if (this.args[key].indexOf(keyword) === 0) {
-                values.push(this.args[key].slice(0, 3))
-            }
-        }
-        return values.toString()
-    }
-
-    public isEmpty(): boolean {
-        return this.args.length === 2
-    }
-
-    public isOneKeyword(): boolean {
-        return this.args.length === 3
-    }
-
-    public isTwoKeyword(): boolean {
-        return this.args.length === 4
-    }
-
-    public isMaxKeyword(): boolean {
-        return this.args.length === 5
-    }
-}
-
-export function optionPattern(arg: Argument): string[][] | string {
-    let degree: number = 5
-    let shape = ' '
-
-    if (arg.isContained('-s=')) {
-        return 'please fill the shape value'
-    } else if (arg.isContainPartial('-s=')) {
-        shape = arg.getValue('-s=', '=').toString()
-        if (shape.length > 1) {
-            return 'please enter one character'
-        }
-    } else if (!arg.isContained('-s')) {
-        shape = '*'
-    } else {
-        return 'check the shape'
-    }
-
-    if (arg.isContainPartial('-d=')) {
-        const strDegree = arg.getValue('-d=', '=').toString()
-        degree = parseInt(strDegree, 10)
-        if (degree <= 0 || degree > 30) {
-            return 'degree is positive number and range is (0<degree<30)'
-        } else if (arg.isContained('-d=')) {
-            return 'please fill the degree value'
-        } else if (isNaN(degree)) {
-            return 'degree must be a number'
-        }
-    } else if (!arg.isContained('-d')) {
-        degree = 5
-    }
-
-    if (arg.isContained('-p=pyramid')) {
-        if (degree % 2 === 0) {
-            return 'please enter odd number when pyramid pattern'
-        } else {
-            const pyramid = new SquareMatrix(shape, new PyramidTriangle())
-            return pyramid.executePattern(degree)
-        }
-    } else if (arg.isContained('-p=rightUpward')) {
-        const rightUpward = new SquareMatrix(shape, new RightUpwardRightTriangle())
-        return rightUpward.executePattern(degree)
-    } else if (arg.isContained('-p=leftUpward')) {
-        const leftUpward = new SquareMatrix(shape, new LeftUpwardRightTriangle())
-        return leftUpward.executePattern(degree)
-    } else if (arg.isContained('-p=rightDownward')) {
-        const rightDownward = new SquareMatrix(shape, new RightDownwardRightTriangle())
-        return rightDownward.executePattern(degree)
-    } else if (arg.isContained('-p=leftDownward')) {
-        const leftDownward = new SquareMatrix(shape, new LeftDownwardRightTriangle())
-        return leftDownward.executePattern(degree)
-    } else if (arg.isContainPartial('-p=')) {
-        return 'please check the pattern value'
-    } else if (!arg.isContained('-p')) {
-        if (degree % 2 === 0) {
-            return 'please enter odd number when pyramid pattern'
-        } else {
-            const pyramid = new SquareMatrix(shape, new PyramidTriangle())
-            return pyramid.executePattern(degree)
-        }
-    } else {
-        return 'check the pattern'
-    }
-}
-
-export function prettier(inputValue: string[][] | string) {
-    if (typeof inputValue !== 'string') {
-        return inputValue.join('\n').replace(/,+/g, '')
-    } else {
-        return inputValue
+    constructor(args: string[], opt: IOption[]) {
+        this.args = args
+        this.options = opt
     }
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function cliStart(): void {
-    const arg = new Argument(process.argv)
-
-    if (arg.isEmpty()) {
-        const pyramid = new SquareMatrix('*', new PyramidTriangle())
-        console.log(prettier(pyramid.executePattern(5)))
-        process.exit(-1)
-    } else if (arg.isContained('-help') || arg.isContained('-h')) {
-        usage()
-        process.exit(-1)
-    } else if (arg.isOneKeyword()) {
-        if (arg.extractOption('-s=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else if (arg.extractOption('-d=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else if (arg.extractOption('-p=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else {
-            console.log('Entered wrong keyword!')
-            process.exit(-1)
-        }
-    } else if (arg.isTwoKeyword()) {
-        if (arg.extractOption('-s=') && arg.extractOption('-d=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else if (arg.extractOption('-s=') && arg.extractOption('-p=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else if (arg.extractOption('-d=') && arg.extractOption('-p=')) {
-            console.log(prettier(optionPattern(arg)))
-        } else {
-            console.log('Entered wrong keyword!')
-            process.exit(-1)
-        }
-    } else if (arg.isMaxKeyword()) {
-        if (
-            arg.extractOption('-p=') &&
-            arg.extractOption('-d=') &&
-            arg.extractOption('-s=')
-        ) {
-            console.log(prettier(optionPattern(arg)))
-        } else {
-            console.error('Entered wrong keyword!')
-            process.exit(-1)
-        }
-    } else {
-        console.error('Entered wrong keyword!')
-        process.exit(-1)
-    }
+function cliStart(): void {
+    const args = new Argument(process.argv.slice(0), options)
+    console.log(args)
 }
+cliStart()
