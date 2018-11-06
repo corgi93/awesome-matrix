@@ -2,9 +2,8 @@
     "semi": false,
     "singleQuote": true,
     "useTabs": false,
-    "printWidth": 90,
+    "printWidth": 120,
     "tabWidth": 4,
-    "trailingComma": "all",
     "arrowParens": "always",
     "overrides": [
         {

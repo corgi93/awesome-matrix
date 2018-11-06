@@ -6,6 +6,7 @@
         "start": "ts-node ./src/index.ts",
         "build": "tsc",
         "test": "jest",
+        "test:dev": "jest --watchAll",
         "lint": "tslint --project .",
         "precommit": "lint-staged"
     },
@@ -49,6 +50,7 @@
         "ts-jest": "^23.10.1",
         "ts-node": "^7.0.1",
         "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.15.0",
         "typescript": "^3.1.2"
     },
     "repository": {

@@ -1,6 +1,6 @@
 {
     "defaultSeverity": "error",
-    "extends": ["tslint:recommended", "prettier"],
+    "extends": ["tslint:recommended", "prettier", "tslint-config-prettier"],
     "rules": {
         "semicolon": false,
         "quotemark": [true, "single"],
