@@ -15,11 +15,11 @@ describe('class Argument test', () => {
         expect(arg.getValue('d')).toEqual('10')
     })
 
-    it('should slice value', () => {
+    it('should be slice value', () => {
         expect(removeDash('-p')).toEqual('p')
     })
 
-    it('should .. when call isValid function', () => {
+    it('should be tested when call isValid function', () => {
         const args = ['node', 'matrix', '-d=10']
         const opt: IOption[] = [
             {
@@ -55,6 +55,18 @@ describe('class Argument test', () => {
         const arg = new Argument(args, opt)
         expect(arg.getDefaultValue('p')).toEqual('pyramid')
     })
+
+    it('should be true when isExistInArgs has entered shortcut h', () => {
+        const args = ['node', 'matrix', '-h']
+        const opt: IOption[] = [
+            {
+                name: 'help',
+                shortcut: 'h'
+            }
+        ]
+        const arg = new Argument(args, opt)
+        expect(arg.isExistInArgs('h')).toEqual(true)
+    })
 })
 
 describe('options test', () => {
@@ -74,6 +86,15 @@ describe('options test', () => {
         expect(validCheck.errorMessages).toEqual(['degree must be a number', 'shape size is one'])
     })
 
+    it('should be false when pyramid pattern has even number', () => {
+        const args = ['node', 'matrix', '-p=pyramid', '-s=@', '-d=8']
+
+        const arg = new Argument(args, options)
+        const validCheck = arg.validationCheck
+        expect(validCheck.isValid).toEqual(false)
+        expect(validCheck.errorMessages).toEqual(['pyramid pattern always has odd number degree'])
+    })
+
     it('should be false when degree is over range', () => {
         const args = ['node', 'matrix', '-p=pyramid', '-s=!', '-d=-5']
         const arg = new Argument(args, options)
@@ -83,7 +104,7 @@ describe('options test', () => {
     })
 
     it('should be false when get more than options', () => {
-        const args = ['node', 'matrix', '-p=pyramiddd', '-s=!', '-d=5', '-e=']
+        const args = ['node', 'matrix', '-p=pyramiddd', '-s=!', '-d=5']
         const arg = new Argument(args, options)
         const validCheck = arg.validationCheck
         expect(validCheck.isValid).toEqual(false)
@@ -96,5 +117,30 @@ describe('options test', () => {
         const validCheck = arg.validationCheck
         expect(validCheck.isValid).toEqual(false)
         expect(validCheck.errorMessages).toEqual(['Duplicated s options'])
+    })
+
+    it('should be false when abnormal option', () => {
+        const args = ['node', 'matrix', '-p=pyramid', '-s=@', '-d=9', '-e=d']
+        const arg = new Argument(args, options)
+        const validCheck = arg.validationCheck
+        expect(validCheck.isValid).toEqual(false)
+        expect(validCheck.errorMessages).toEqual([`e is not right option. please check the usage`])
+    })
+
+    it('should be pyramid when default pattern', () => {
+        const args = ['node', 'matrix']
+        const arg = new Argument(args, options)
+        expect(arg.getValue('p')).toEqual('pyramid')
+    })
+
+    it('should be called spy handler when run handler', () => {
+        const args = ['node', 'matrix', '-h']
+        const handler = jest.fn(() => {
+            return false
+        })
+        const arg = new Argument(args, [{ handler, name: 'help', shortcut: 'h' }])
+
+        arg.runHandler()
+        expect(handler).toBeCalled()
     })
 })

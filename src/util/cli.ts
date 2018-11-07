@@ -1,5 +1,6 @@
 import { LeftDownwardRightTriangle } from '../patterns/leftDownwardRightTriangle'
 import { LeftUpwardRightTriangle } from '../patterns/leftUpwardRightTriangle'
+import { PyramidTriangle } from '../patterns/pyramidTriangle'
 import { RightDownwardRightTriangle } from '../patterns/rightDownwardRightTriangle'
 import { RightUpwardRightTriangle } from '../patterns/rightUpwardRightTriangle'
 import { SquareMatrix } from '../squareMatrix'
@@ -9,7 +10,7 @@ function usage(): void {
     console.log('AwesomeMatrix CLI')
     console.log('Usage: matrix [Option]')
     console.log('Option :')
-    console.log('  -help , -h :  Display this help message')
+    console.log('  -h :  Display this help message')
     console.log('  -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)')
     console.log('  -s=character : Users can choose the shape character (defaultValue -s=*)')
     console.log('  -d=degree : Users can set the order of array (defaultValue -d=5)')
@@ -17,9 +18,11 @@ function usage(): void {
 
 export interface IOption {
     name: string
+    handler?: () => boolean
     shortcut: string
     defaultValue?: string
-    validation?: (value: string) => IValidation
+    additional?: string[]
+    validation?: (value: string, ...additional: string[]) => IValidation
 }
 
 interface IValidation {
@@ -28,15 +31,22 @@ interface IValidation {
 }
 
 export const options: IOption[] = [
-    { name: 'help', shortcut: '-h' },
+    {
+        handler: () => {
+            usage()
+            return false
+        },
+        name: 'help',
+        shortcut: 'h'
+    },
     {
         defaultValue: 'pyramid',
         name: 'pattern',
         shortcut: 'p',
-        validation: (pValue: string) => {
+        validation: (value: string) => {
             const patterns = ['pyramid', 'leftUpward', 'rightUpward', 'leftDownward', 'rightDownward']
             for (const pattern of patterns) {
-                if (pattern === pValue) {
+                if (pattern === value) {
                     return { isValid: true }
                 }
             }
@@ -44,12 +54,19 @@ export const options: IOption[] = [
         }
     },
     {
+        additional: ['p'],
         defaultValue: '5',
         name: 'degree',
         shortcut: 'd',
-        validation: (value: string) => {
+        validation: (value: string, pValue: string) => {
             const dValue = parseInt(value, 10)
 
+            if (pValue === 'pyramid' && dValue % 2 === 0) {
+                return {
+                    errorMessage: 'pyramid pattern always has odd number degree',
+                    isValid: false
+                }
+            }
             if (isNaN(dValue)) {
                 return {
                     errorMessage: 'degree must be a number',
@@ -123,20 +140,51 @@ export class Argument {
         return undefined
     }
 
+    public runHandler(): boolean {
+        for (const option of this.options) {
+            if (option.handler && this.isExistInArgs(option.shortcut)) {
+                const isContinue: boolean = option.handler()
+                if (!isContinue) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    public isExistInArgs(shortcut: string): boolean {
+        for (const arg of this.args) {
+            const argVal = getParameter(arg)
+            if (shortcut === argVal) {
+                return true
+            }
+        }
+        return false
+    }
+
     private evaluation() {
         this.optionsEval()
         this.duplicationEval()
+        this.abnormalOptionEval()
     }
 
     private optionsEval() {
         for (const option of this.options) {
             const value = this.getValue(option.shortcut)
+            const additionalValues: string[] = []
+
+            if (option.additional) {
+                for (const additionalOpt of option.additional) {
+                    const addOpt = this.getValue(additionalOpt)
+                    additionalValues.push(addOpt)
+                }
+            }
 
             if (!option.validation) {
                 continue
             }
 
-            const validation = option.validation(value)
+            const validation = option.validation(value, ...additionalValues)
 
             if (validation.isValid) {
                 continue
@@ -163,6 +211,23 @@ export class Argument {
             this.validationCheck.errorMessages.push(`Duplicated ${param} options`)
         }
     }
+
+    private abnormalOptionEval() {
+        const checkSet = new Set()
+        for (const option of this.options) {
+            checkSet.add(option.shortcut)
+        }
+        for (const arg of this.args.slice(2)) {
+            const param = getParameter(arg)
+
+            if (checkSet.has(param)) {
+                continue
+            }
+
+            this.validationCheck.isValid = false
+            this.validationCheck.errorMessages.push(`${param} is not right option. please check the usage`)
+        }
+    }
 }
 
 export function getParameter(arg: string): string {
@@ -183,6 +248,10 @@ export function cliStart(): void {
     const pattern = args.getValue('p')
     const validCheck = args.validationCheck
 
+    if (!args.runHandler()) {
+        process.exit(-1)
+    }
+
     if (!validCheck.isValid) {
         for (const errorMessage of validCheck.errorMessages) {
             console.error(errorMessage)
@@ -191,19 +260,44 @@ export function cliStart(): void {
     }
 
     if (pattern === 'pyramid') {
-        const pyramid = new SquareMatrix(shape, new RightUpwardRightTriangle())
-        pyramid.executePattern(degree)
+        const pyramid = new SquareMatrix(shape, new PyramidTriangle())
+        console.log(
+            pyramid
+                .executePattern(degree)
+                .join('\n')
+                .replace(/,+/g, '')
+        )
     } else if (pattern === 'rightUpward') {
         const rightUpward = new SquareMatrix(shape, new RightUpwardRightTriangle())
-        rightUpward.executePattern(degree)
+        console.log(
+            rightUpward
+                .executePattern(degree)
+                .join('\n')
+                .replace(/,+/g, '')
+        )
     } else if (pattern === 'leftUpward') {
         const leftUpward = new SquareMatrix(shape, new LeftUpwardRightTriangle())
-        leftUpward.executePattern(degree)
+        console.log(
+            leftUpward
+                .executePattern(degree)
+                .join('\n')
+                .replace(/,+/g, '')
+        )
     } else if (pattern === 'rightDownward') {
         const rightDownward = new SquareMatrix(shape, new RightDownwardRightTriangle())
-        rightDownward.executePattern(degree)
+        console.log(
+            rightDownward
+                .executePattern(degree)
+                .join('\n')
+                .replace(/,+/g, '')
+        )
     } else if (pattern === 'leftDownward') {
         const leftDownward = new SquareMatrix(shape, new LeftDownwardRightTriangle())
-        leftDownward.executePattern(degree)
+        console.log(
+            leftDownward
+                .executePattern(degree)
+                .join('\n')
+                .replace(/,+/g, '')
+        )
     }
 }
