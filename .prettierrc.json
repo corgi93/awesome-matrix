@@ -1,0 +1,16 @@
+{
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "printWidth": 120,
+    "tabWidth": 4,
+    "arrowParens": "always",
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "parser": "json"
+            }
+        }
+    ]
+}

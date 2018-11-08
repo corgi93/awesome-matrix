@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+const { cliStart } = require('../build/util/cli')
+cliStart()
+
