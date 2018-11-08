@@ -1,6 +1,6 @@
 {
     "name": "awesome-matrix",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "main": "build/index.js",
     "scripts": {
         "start": "ts-node ./src/index.ts",
@@ -8,7 +8,8 @@
         "test": "jest",
         "test:dev": "jest --watchAll",
         "lint": "tslint --project .",
-        "precommit": "lint-staged"
+        "precommit": "lint-staged",
+        "prepublish": "npm run build && npm run test && npm run lint"
     },
     "bin": {
         "matrix": "./bin/matrix"

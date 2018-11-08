@@ -4,7 +4,6 @@ This is a simple two-dimensional matrix library written by [TypeScript](https://
 that receives input options from the user.
 
 -   This is written in TypeScript
--   Compile to javascript using ts-node
 -   Provides basically five patterns.
 
 ### Installation
@@ -33,7 +32,7 @@ const matrix = new SquareMatrix('&', new RightUpwardRightTriangle()) // => Squar
 matrix.executePattern(7) // => executePattern(degree)
 ```
 
--   provided patterns
+-   provided API    
 
 ```typescript
 export { LeftDownwardRightTriangle } from 'awesome-matrix'
@@ -47,7 +46,7 @@ export { SquareMatrix, IMatrixStrategy } from 'awesome-matrix'
 ### Examples
 
 ```typescript
-import { SquareMatrix } from ''
+import { IMatrixStrategy, SquareMatrix, LeftUpwardRightTriangle, PyramidTriangle } from 'awesome-matrix'
 
 // get print shape '&' and pattern LeftUpward-RightTriangle
 const leftUpward = new SquareMatrix('&', new LeftUpwardRightTriangle())
@@ -63,12 +62,19 @@ pyramid.executePattern(3) // => degree: 3
 -   help
 
 ```bash
-$matrix -h
+$ matrix -h
 ```
 
 -   Usage
 
 ```bash
+Usage: matrix [Option]
+Option :
+    -h : Display this help message
+    -p=pattern : pattern is one of (pyramid | leftUpward | rightUpward | leftDownward | rightDownward)
+    -s=character : Users can choose the shape character (defaultValue -s=\*)
+    -d=degree : Users can set the order of array (defaultValue -d=5)
+
 $ matrix -d=degree (default option : pattern and shapeCharacter)
 $ matrix -p=patterns -s=shapeCharacter -d=degree
 ```
@@ -87,6 +93,7 @@ $ matrix
 
 ```bash
 $ matrix -p=leftUpward -s=# -d=6
+
 /* conditional matrix
     #
     ##
@@ -99,6 +106,7 @@ $ matrix -p=leftUpward -s=# -d=6
 
 ```bash
 $ matrix -p=rightDownward -s=D
+
 /* partial conditional matrix (degree is default(5))
     DDDDD
      DDDD
