@@ -1,40 +1,53 @@
 # awesome-matrix
 
-This is a simple two-dimensional matrix library written by [TypeScript](https://www.typescriptlang.org/docs/home.html) 
+This is a simple two-dimensional matrix library written by [TypeScript](https://www.typescriptlang.org/docs/home.html)
 that receives input options from the user.
 
 -   This is written in TypeScript
 -   Compile to javascript using ts-node
 -   Provides basically five patterns.
 
-# Installation
+### Installation
 
-<code>**npm install awesome-matrix**</code>
-
-# Usage
-
-```typescript
-const { SquareMatrix } = require('squareMatrix')
-
-const rightUp = new SquareMatrix('&', new RightUpwardRightTriangle())
-rightUp.executePattern(7) // => degree : 7
+```bash
+npm install awesome-matrix
 ```
 
-- provided patterns
+### Usage
 
 ```typescript
-export { LeftDownwardRightTriangle } from './patterns/leftDownwardRightTriangle'
-export { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
-export { PyramidTriangle } from './patterns/pyramidTriangle'
-export { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangle'
-export { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
-export { SquareMatrix, IMatrixStrategy } from './squareMatrix'
+import { IMatrixStrategy, RightUpwardRightTriangle, SquareMatrix } from 'awesome-matrix'
+
+export class RightUpwardRightTriangle implements IMatrixStrategy {
+    public twoDimensionArrayLogic(degree: number, stringShape: string): string[][] {
+        const twoDimensionArray: string[][] = []
+        // ...
+        return twoDimensionArray
+    }
+}
+
+const rightUp = new RightUpwardRightTriangle()
+rightUp.twoDimensionArrayLogic(5, '@') // => twoDimensionArrayLogic(degree, shapeCharacter)
+
+const matrix = new SquareMatrix('&', new RightUpwardRightTriangle()) // => SquareMatrix(shapeCharacter, pattern)
+matrix.executePattern(7) // => executePattern(degree)
 ```
 
-# Examples
+-   provided patterns
 
 ```typescript
-import { SquareMatrix } from '../squareMatrix'
+export { LeftDownwardRightTriangle } from 'awesome-matrix'
+export { LeftUpwardRightTriangle } from 'awesome-matrix'
+export { PyramidTriangle } from 'awesome-matrix'
+export { RightDownwardRightTriangle } from 'awesome-matrix'
+export { RightUpwardRightTriangle } from 'awesome-matrix'
+export { SquareMatrix, IMatrixStrategy } from 'awesome-matrix'
+```
+
+### Examples
+
+```typescript
+import { SquareMatrix } from ''
 
 // get print shape '&' and pattern LeftUpward-RightTriangle
 const leftUpward = new SquareMatrix('&', new LeftUpwardRightTriangle())
@@ -45,60 +58,52 @@ const pyramid = new SquareMatrix('K', new PyramidTriangle())
 pyramid.executePattern(3) // => degree: 3
 ```
 
-# CLI
+### CLI
 
-```
-// help
+-   help
+
+```bash
 $matrix -h
+```
 
+-   Usage
 
-// Usage
-$ matrix degree (default option : pattern and character)
-$ matrix patterns character degree
+```bash
+$ matrix -d=degree (default option : pattern and shapeCharacter)
+$ matrix -p=patterns -s=shapeCharacter -d=degree
+```
 
-// Example
+-   Example
+
+```bash
 $ matrix
 
 /* default matrix
-==============
       @
      @@@
     @@@@@
-==============
 */
+```
 
+```bash
 $ matrix -p=leftUpward -s=# -d=6
-
 /* conditional matrix
-==============
     #
     ##
     ###
     ####
     #####
     ######
-==============
 */
+```
 
+```bash
 $ matrix -p=rightDownward -s=D
-
 /* partial conditional matrix (degree is default(5))
-==============
     DDDDD
      DDDD
       DDD
        DD
         D
-==============
 */
 ```
-
-# Running specs
-
-<code>npm run test</code> to run the specs
-
-# Dependencies
-
-To run this project we need to have:
-
--   ts-node
