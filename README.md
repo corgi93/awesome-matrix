@@ -1,79 +1,104 @@
-#awesome-twoDimensional-matrix
+# awesome-matrix
 
-This is a simple two-dimensional matrix library written by [TypeScript](https://www.typescriptlang.org/docs/home.html) that receives input from the user.
+This is a simple two-dimensional matrix library written by [TypeScript](https://www.typescriptlang.org/docs/home.html) 
+that receives input options from the user.
 
-- This is written in TypeScript
-- Compile to javascript using ts-node
-- Provides basically five patterns.
+-   This is written in TypeScript
+-   Compile to javascript using ts-node
+-   Provides basically five patterns.
 
-#Installation
-<code>**npm install awesome-twoDimensional-matrix**</code>
+# Installation
 
-#Usage
-<pre>
-const SquareMatrix = require('squareMatrix')
+<code>**npm install awesome-matrix**</code>
 
-//user-defined matrix
-class UserDefinedMatrix implements IMatrixStrategy{
-    public twoDimensionArrayLogic(degree: number, stringShape: string): string[][] {
-    
-    // ...
-   
-   }
-}
+# Usage
+
+```typescript
+const { SquareMatrix } = require('squareMatrix')
+
+const rightUp = new SquareMatrix('&', new RightUpwardRightTriangle())
+rightUp.executePattern(7) // => degree : 7
+```
+
+- provided patterns
+
+```typescript
+export { LeftDownwardRightTriangle } from './patterns/leftDownwardRightTriangle'
+export { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
+export { PyramidTriangle } from './patterns/pyramidTriangle'
+export { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangle'
+export { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
+export { SquareMatrix, IMatrixStrategy } from './squareMatrix'
+```
+
+# Examples
+
+```typescript
+import { SquareMatrix } from '../squareMatrix'
+
+// get print shape '&' and pattern LeftUpward-RightTriangle
+const leftUpward = new SquareMatrix('&', new LeftUpwardRightTriangle())
+leftUpward.executePattern(7) // => degree : 7
+
+// get print shape 'K' and pattern Pyramid
+const pyramid = new SquareMatrix('K', new PyramidTriangle())
+pyramid.executePattern(3) // => degree: 3
+```
+
+# CLI
+
+```
+// help
+$matrix -h
 
 
-const userDefinedMatrix = new SquareMatrix('*', new UserDefinedMatrix())
-userDefinedMatrix.executePattern(4)
-</pre>
+// Usage
+$ matrix degree (default option : pattern and character)
+$ matrix patterns character degree
 
-<pre>
-//This offer 5 patterns matrix 
-import { LeftDownwardRightTriangle } from './patterns/leftDownwardRightTriangle'
-import { LeftUpwardRightTriangle } from './patterns/leftUpwardRightTriangle'
-import { PyramidTriangle } from './patterns/pyramidTriangle'
-import { RightDownwardRightTriangle } from './patterns/rightDownwardRightTriangle'
-import { RightUpwardRightTriangle } from './patterns/rightUpwardRightTriangle'
-import { SquareMatrix } from './squareMatrix'
-
-const leftUpwardRightTriangle = new SquareMatrix(5, new LeftUpwardRightTriangle())
-const rightUpwardRightTriangle = new SquareMatrix('%', new RightUpwardRightTriangle())
-const pyramidTriangle = new SquareMatrix('+', new PyramidTriangle())
-const leftDownwardRightTriangle = new SquareMatrix('K', new LeftDownwardRightTriangle())
-const rightDownwardRightTriangle = new SquareMatrix('*', new RightDownwardRightTriangle())
-
-leftUpwardRightTriangle.executePattern(4)
-rightUpwardRightTriangle.executePattern(7)
-pyramidTriangle.executePattern(7)
-leftDownwardRightTriangle.executePattern(9)
-rightDownwardRightTriangle.executePattern(6)
-
-</pre>
-
-#CLI 
-<pre>
-// call usage
-$matrix (-h|-help)
-
-//default matrix (-p=pyramid -d=5 -s=*)
-$matrix
-
-//usage
-$ matrix shapeCaracter degree (default pattern)
-$ matrix patterns shapeCharacter degree
-
-//example
+// Example
 $ matrix
-$ matrix -p=leftUpward -s=@ -d=7
 
-</pre>
+/* default matrix
+==============
+      @
+     @@@
+    @@@@@
+==============
+*/
 
-#Running specs
+$ matrix -p=leftUpward -s=# -d=6
+
+/* conditional matrix
+==============
+    #
+    ##
+    ###
+    ####
+    #####
+    ######
+==============
+*/
+
+$ matrix -p=rightDownward -s=D
+
+/* partial conditional matrix (degree is default(5))
+==============
+    DDDDD
+     DDDD
+      DDD
+       DD
+        D
+==============
+*/
+```
+
+# Running specs
+
 <code>npm run test</code> to run the specs
 
-#Dependencies
+# Dependencies
+
 To run this project we need to have:
-- ts-node
 
-
-
+-   ts-node
