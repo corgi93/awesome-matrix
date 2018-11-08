@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+src
+.editorconfig
+.gitignore
+.gitlab-ci.yml
+.prettierrc.json
+tsconfig.json
+tslint.json
+.idea
