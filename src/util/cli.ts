@@ -5,7 +5,6 @@ import { RightDownwardRightTriangle } from '../patterns/rightDownwardRightTriang
 import { RightUpwardRightTriangle } from '../patterns/rightUpwardRightTriangle'
 import { SquareMatrix } from '../squareMatrix'
 
-// @ts-ignore
 function usage(): void {
     console.log('AwesomeMatrix CLI')
     console.log('Usage: matrix [Option]')
